@@ -4,7 +4,6 @@ using UnityEngine;
 
 public class BaseEntity : MonoBehaviour
 {
-
     float speed = 1f;
     Rigidbody rb;
     bool isGrounded = false;
@@ -32,6 +31,7 @@ public class BaseEntity : MonoBehaviour
                 hasDoubleJumped = true;
             rb.velocity += Vector3.up * 20;
         }
+
         return jump;
     }
 
@@ -62,7 +62,6 @@ public class BaseEntity : MonoBehaviour
 
     protected void OnCollisionExit(Collision collision)
     {
-
         if (collision.gameObject.tag.Contains("solid"))
         {
             isGrounded = false;
