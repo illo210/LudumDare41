@@ -45,6 +45,9 @@ public class MoveEnemy : MonoBehaviour
                 currentWaypoint++;
                 lastWaypointSwitchTime = Time.time;
                 // TODO: Rotate into move direction
+                if (waypoints[currentWaypoint].tag == "Jumper")
+                {
+                }
             }
             else
             {
