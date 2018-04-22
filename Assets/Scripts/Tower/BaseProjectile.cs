@@ -5,7 +5,7 @@ using UnityEngine;
 
 public class BaseProjectile : MonoBehaviour {
 
-    protected float speed = 10.0f; // Gotta go fast
+    protected float speed = 3.0f; // Gotta go fast
     protected bool _isUsed = false;
     protected GameObject _target;
 
@@ -27,11 +27,10 @@ public class BaseProjectile : MonoBehaviour {
         {
             if (_target == null)
             {
-                Debug.Log("rip");
                 Destroy(gameObject);
             }
             float distance = Vector3.Distance(transform.position, _target.transform.position);
-            transform.position = Vector3.Lerp(transform.position, _target.transform.position, speed / distance);
+            transform.position = Vector3.MoveTowards(transform.position, _target.transform.position, speed / distance);
         }
     }
 

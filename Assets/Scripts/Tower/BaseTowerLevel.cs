@@ -15,7 +15,7 @@ public class BaseTowerLevel : MonoBehaviour {
         End
     }
 
-    public string projectileName;
+    public BaseProjectile projectile;
     protected ProjectilePool _projectilePool;
     protected bool _canAttack = true;
     protected EnemiesOrder _attackOrder;
@@ -30,7 +30,7 @@ public class BaseTowerLevel : MonoBehaviour {
 
     protected float GetCooldown()
     {
-        return 1.0f;
+        return 0.5f;
     }
 
     private IEnumerator AttackCooldown(float cooldownTime)
@@ -48,9 +48,8 @@ public class BaseTowerLevel : MonoBehaviour {
     {
         if (_canAttack)
         {
-            Debug.Log("Fire");
             _canAttack = false;
-            BaseProjectile newProjectile = _projectilePool.GetProjectile(projectileName);
+            BaseProjectile newProjectile = _projectilePool.GetProjectile(projectile.GetProjectileType());
             newProjectile.MoveTo(transform.position);
             newProjectile.transform.SetParent(transform);
             newProjectile.Launch(enemies[0]);
@@ -110,9 +109,9 @@ public class BaseTowerLevel : MonoBehaviour {
     {
         if (other.tag.Contains("Entity"))
         {
-            BaseEnemy enemy = other.gameObject.GetComponentInParent<BaseEnemy>();
-            // TODO check if we can target the enemy
-            _inRange.Add(other.gameObject);
+            BaseEntity enemy = other.gameObject.GetComponentInParent<BaseEntity>();
+            if (enemy.CanBeTarget(projectile))
+                _inRange.Add(other.gameObject);
         }
     }
 

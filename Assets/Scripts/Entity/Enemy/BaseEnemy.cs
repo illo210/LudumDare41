@@ -11,6 +11,7 @@ public class BaseEnemy : BaseEntity
     protected override void Start()
     {
         base.Start();
+        speed *= 0.9f;
         _collider = GetComponent<Collider>();
     }
 
