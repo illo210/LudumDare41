@@ -11,8 +11,11 @@ public class BaseEntity : MonoBehaviour
     protected int _health = 3;
     protected GameObject _healthBar;
 
+    [HideInInspector]
+    public float move = 0;
+
     // Use this for initialization
-   protected virtual void Start()
+    protected virtual void Start()
     {
         rb = GetComponent<Rigidbody>();
         GetHealthBar();
@@ -40,6 +43,7 @@ public class BaseEntity : MonoBehaviour
 
     protected void Move(float moveDirection)
     {
+        move = moveDirection;
         rb.position += Vector3.right * (moveDirection * speed / 7);
     }
 
