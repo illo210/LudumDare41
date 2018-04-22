@@ -1,21 +1,21 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class Health : MonoBehaviour
 {
-    TextMesh tm;
+    private Text tm;
 
     // Use this for initialization
     void Start()
     {
-        tm = GetComponent<TextMesh>();
+        
     }
 
     // Update is called once per frame
     void Update()
     {
-        transform.forward = Camera.main.transform.forward;
     }
 
     public int current()

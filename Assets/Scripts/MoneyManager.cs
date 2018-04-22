@@ -5,7 +5,8 @@ using UnityEngine;
 public class MoneyManager : MonoBehaviour
 {
     public int money;
-
+    private 
+    
     // Use this for initialization
     void Start()
     {

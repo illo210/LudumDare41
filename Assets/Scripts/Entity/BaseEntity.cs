@@ -11,8 +11,7 @@ public class BaseEntity : MonoBehaviour
     protected int _health = 3;
     protected GameObject _healthBar;
 
-    [HideInInspector]
-    public float move = 0;
+    [HideInInspector] public float move = 0;
 
     // Use this for initialization
     protected virtual void Start()
@@ -80,6 +79,19 @@ public class BaseEntity : MonoBehaviour
         script.followedEntity = transform;
         script.enabled = true;
         _healthBar.transform.SetParent(GameObject.Find("Canvas").transform);
+    }
+
+    protected virtual void decrease(int amount)
+    {
+        if (_health > amount)
+        {
+            UnityEngine.UI.Text text = _healthBar.GetComponent<UnityEngine.UI.Text>();
+            text.text = text.text.Remove(text.text.Length - amount);
+        }
+        else
+        {
+            Destroy(transform.parent.gameObject);
+        }
     }
 
     protected virtual void OnDestroy()
