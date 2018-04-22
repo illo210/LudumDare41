@@ -1532,12 +1532,12 @@ Prefab:
     - target: {fileID: 224277251399317646, guid: 6e3d45db164e76949bd96d7cc1e486dd,
         type: 2}
       propertyPath: m_LocalPosition.x
-      value: 322
+      value: 450
       objectReference: {fileID: 0}
     - target: {fileID: 224277251399317646, guid: 6e3d45db164e76949bd96d7cc1e486dd,
         type: 2}
       propertyPath: m_LocalPosition.y
-      value: 181
+      value: 253
       objectReference: {fileID: 0}
     - target: {fileID: 224277251399317646, guid: 6e3d45db164e76949bd96d7cc1e486dd,
         type: 2}
@@ -1619,35 +1619,45 @@ Prefab:
       propertyPath: m_Pivot.y
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 224248743226580444, guid: 6e3d45db164e76949bd96d7cc1e486dd,
+        type: 2}
+      propertyPath: m_LocalPosition.x
+      value: 390
+      objectReference: {fileID: 0}
+    - target: {fileID: 224248743226580444, guid: 6e3d45db164e76949bd96d7cc1e486dd,
+        type: 2}
+      propertyPath: m_LocalPosition.y
+      value: -146
+      objectReference: {fileID: 0}
     - target: {fileID: 224510067166607698, guid: 6e3d45db164e76949bd96d7cc1e486dd,
         type: 2}
       propertyPath: m_LocalPosition.x
-      value: -246.6
+      value: -374.6
       objectReference: {fileID: 0}
     - target: {fileID: 224510067166607698, guid: 6e3d45db164e76949bd96d7cc1e486dd,
         type: 2}
       propertyPath: m_LocalPosition.y
-      value: -15
+      value: -87
       objectReference: {fileID: 0}
     - target: {fileID: 224255973780968442, guid: 6e3d45db164e76949bd96d7cc1e486dd,
         type: 2}
       propertyPath: m_LocalPosition.x
-      value: -132.29999
+      value: -260.3
       objectReference: {fileID: 0}
     - target: {fileID: 224255973780968442, guid: 6e3d45db164e76949bd96d7cc1e486dd,
         type: 2}
       propertyPath: m_LocalPosition.y
-      value: 139.1
+      value: 211.1
       objectReference: {fileID: 0}
     - target: {fileID: 224365050853650058, guid: 6e3d45db164e76949bd96d7cc1e486dd,
         type: 2}
       propertyPath: m_LocalPosition.x
-      value: -253
+      value: -381
       objectReference: {fileID: 0}
     - target: {fileID: 224365050853650058, guid: 6e3d45db164e76949bd96d7cc1e486dd,
         type: 2}
       propertyPath: m_LocalPosition.y
-      value: 137.7
+      value: 209.7
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 6e3d45db164e76949bd96d7cc1e486dd, type: 2}
@@ -2244,6 +2254,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fb3a1b457f3fa5f4897ab9a4ffacaf21, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  move: 0
 --- !u!1 &1791562848
 GameObject:
   m_ObjectHideFlags: 0
