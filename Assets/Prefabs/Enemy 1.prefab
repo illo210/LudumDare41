@@ -24,6 +24,7 @@ GameObject:
   - component: {fileID: 23585874099281780}
   - component: {fileID: 54715932230175332}
   - component: {fileID: 114052630472792932}
+  - component: {fileID: 111440029168987574}
   m_Layer: 0
   m_Name: Enemy 1
   m_TagString: Entity
@@ -100,6 +101,21 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 120
   m_CollisionDetection: 0
+--- !u!111 &111440029168987574
+Animation:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1452872006315136}
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Animation: {fileID: 0}
+  m_Animations:
+  - {fileID: 0}
+  m_WrapMode: 0
+  m_PlayAutomatically: 0
+  m_AnimatePhysics: 0
+  m_CullingType: 0
 --- !u!114 &114052630472792932
 MonoBehaviour:
   m_ObjectHideFlags: 1
