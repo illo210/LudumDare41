@@ -79,6 +79,7 @@ public class BaseEnemy : BaseEntity
 
     private IEnumerator Die(Animator animDeath)
     {
+        Debug.Log("Deb");
         animDeath.SetBool("Explode", true);
         yield return new WaitForSeconds(0.8f);
         Destroy(gameObject);

@@ -2,8 +2,10 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class HeroController : BaseEntity {
-    void FixedUpdate () {
+public class HeroController : BaseEntity
+{
+    void FixedUpdate()
+    {
         float move = Input.GetAxis("Horizontal");
 
         Move(move);
@@ -11,11 +13,11 @@ public class HeroController : BaseEntity {
         {
             Jump();
         }
-	}
+    }
 
     protected override void GetHealthBar()
     {
-        return ;
+        return;
     }
 
     public override bool CanBeTarget(BaseProjectile projectile)

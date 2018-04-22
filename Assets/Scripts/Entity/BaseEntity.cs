@@ -12,7 +12,7 @@ public class BaseEntity : MonoBehaviour
     protected GameObject _healthBar;
 
     // Use this for initialization
-   protected virtual void Start()
+    protected virtual void Start()
     {
         rb = GetComponent<Rigidbody>();
         GetHealthBar();
