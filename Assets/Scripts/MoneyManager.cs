@@ -1,15 +1,19 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class MoneyManager : MonoBehaviour
 {
     public int money;
-    private 
-    
+
+    private UnityEngine.UI.Text text;
+
     // Use this for initialization
     void Start()
     {
+        text = GetComponent<Text>();
+        text.text = money.ToString();
     }
 
     // Update is called once per frame
@@ -20,8 +24,7 @@ public class MoneyManager : MonoBehaviour
     public void get_money(int amount)
     {
         money += amount;
-
-        //Display
+        text.text = money.ToString();
     }
 
     public void give_money(int amount)
@@ -29,7 +32,7 @@ public class MoneyManager : MonoBehaviour
         if (money - amount >= 0)
         {
             money -= amount;
-            //Display
+            text.text = money.ToString();
         }
     }
 }

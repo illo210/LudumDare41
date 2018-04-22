@@ -61,6 +61,7 @@ public class BaseEntity : MonoBehaviour
                 hasDoubleJumped = false;
             }
         }
+
         if (collision.gameObject.tag.Contains("Entity"))
         {
             Physics.IgnoreCollision(collision.collider, _collider);
@@ -87,16 +88,21 @@ public class BaseEntity : MonoBehaviour
         _healthBar.transform.SetParent(GameObject.Find("Canvas").transform);
     }
 
-    protected virtual void decrease(int amount)
+    public void decrease(int amount)
     {
         if (_health > amount)
         {
             UnityEngine.UI.Text text = _healthBar.GetComponent<UnityEngine.UI.Text>();
             text.text = text.text.Remove(text.text.Length - amount);
+            _health--;
         }
         else
         {
-            Destroy(transform.parent.gameObject);
+            if (gameObject)
+            {
+                Destroy(gameObject);
+                GameObject.Find("Money").GetComponentInChildren<MoneyManager>().get_money(1);
+            }
         }
     }
 

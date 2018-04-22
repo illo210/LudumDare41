@@ -17,6 +17,7 @@ public class BaseProjectile : MonoBehaviour {
     public void Explode()
     {
         // TODO Do damage
+        _target.GetComponent<BaseEntity>().decrease(1);
         ProjectilePool pool = ProjectilePool.GetInstance();
         pool.DestroyProjectile(this);
     }
