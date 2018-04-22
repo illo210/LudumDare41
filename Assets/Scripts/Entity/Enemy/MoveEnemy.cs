@@ -20,7 +20,6 @@ public class MoveEnemy : MonoBehaviour
     void Update()
     {
         // 1 
-        Debug.Log(waypoints.Length);
         Vector3 startPosition = waypoints[currentWaypoint].transform.position;
         Vector3 endPosition;
         if (waypoints.Length > currentWaypoint + 1)
