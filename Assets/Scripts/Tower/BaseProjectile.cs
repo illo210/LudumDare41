@@ -5,11 +5,11 @@ using UnityEngine;
 
 public class BaseProjectile : MonoBehaviour {
 
-    protected float speed = 20; // Gotta go fast
-    protected BaseEnemy _target;
-    protected bool _isUsed = true;
+    protected float speed = 10.0f; // Gotta go fast
+    protected bool _isUsed = false;
+    protected GameObject _target;
 
-    public void Launch(BaseEnemy enemy)
+    public void Launch(GameObject enemy)
     {
         _target = enemy;
     }
@@ -21,9 +21,18 @@ public class BaseProjectile : MonoBehaviour {
         pool.DestroyProjectile(this);
     }
 	
-	// Update is called once per frame
-	void FixedUpdate () {
-        // TODO get the position of the enemy and go in its direction
+	void FixedUpdate ()
+    {
+        if (_isUsed)
+        {
+            if (_target == null)
+            {
+                Debug.Log("rip");
+                Destroy(gameObject);
+            }
+            float distance = Vector3.Distance(transform.position, _target.transform.position);
+            transform.position = Vector3.Lerp(transform.position, _target.transform.position, speed / distance);
+        }
     }
 
     public void Free()
@@ -37,15 +46,15 @@ public class BaseProjectile : MonoBehaviour {
     }
 
     // Need to be override
-    static public String GetProjectileType()
+    public String GetProjectileType()
     {
         return "BaseProjectile";
     }
 
     // Need to be override
-    public bool IsSameType(BaseProjectile projectile)
+    public bool IsSameType(string projectile)
     {
-        return false;
+        return GetProjectileType() == projectile;
     }
 
     public bool IsFree()
@@ -61,5 +70,13 @@ public class BaseProjectile : MonoBehaviour {
     public static BaseProjectile Copy()
     {
         return new BaseProjectile();
+    }
+
+    protected void OnTriggerEnter(Collider other)
+    {
+        if (other.gameObject == _target)
+        {
+            Explode();
+        }
     }
 }
