@@ -8,11 +8,13 @@ public class BaseEntity : MonoBehaviour
     Rigidbody rb;
     bool isGrounded = false;
     bool hasDoubleJumped = false;
+    int _health = 3;
 
     // Use this for initialization
     void Start()
     {
         rb = GetComponent<Rigidbody>();
+        GetHealthBar();
     }
 
     protected bool CanJump()
@@ -66,5 +68,17 @@ public class BaseEntity : MonoBehaviour
         {
             isGrounded = false;
         }
+    }
+
+    protected virtual void GetHealthBar()
+    {
+        GameObject healthBar = Instantiate(GameObject.Find("HealthBar"));
+        UnityEngine.UI.Text text = healthBar.GetComponent<UnityEngine.UI.Text>();
+        text.text = new string('-', _health);
+        text.enabled = true;
+        FollowingEntity script = healthBar.GetComponent<FollowingEntity>();
+        script.followedEntity = transform;
+        script.enabled = true;
+        healthBar.transform.SetParent(GameObject.Find("Canvas").transform);
     }
 }

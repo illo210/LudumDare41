@@ -12,4 +12,9 @@ public class HeroController : BaseEntity {
             Jump();
         }
 	}
+
+    protected override void GetHealthBar()
+    {
+        return ;
+    }
 }
