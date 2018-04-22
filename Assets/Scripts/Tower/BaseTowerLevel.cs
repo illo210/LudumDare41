@@ -15,15 +15,16 @@ public class BaseTowerLevel : MonoBehaviour {
         End
     }
 
-    public BaseProjectile projectile;
-    public ProjectilePool projectilePool;
+    public string projectileName;
+    protected ProjectilePool _projectilePool;
     protected bool _canAttack = true;
     protected EnemiesOrder _attackOrder;
-    protected List<BaseEnemy> _inRange;
+    protected List<GameObject> _inRange = new List<GameObject>();
     protected SphereCollider _range;
 
-    protected void Start()
+    protected virtual void Start()
     {
+        _projectilePool = GameObject.Find("ProjectilePool").GetComponent<ProjectilePool>();
         _range = GetComponent<SphereCollider>();
     }
 
@@ -38,24 +39,26 @@ public class BaseTowerLevel : MonoBehaviour {
         _canAttack = true;
     }
 
-    protected List<BaseEnemy> OrderEnemies(List<BaseEnemy> enemies)
+    protected List<GameObject> OrderEnemies(List<GameObject> enemies)
     {
         return enemies;
     }
 
-    protected void Attack(List<BaseEnemy> enemies)
+    protected void Attack(List<GameObject> enemies)
     {
         if (_canAttack)
         {
+            Debug.Log("Fire");
             _canAttack = false;
-            BaseProjectile newProjectile = projectilePool.GetProjectile(projectile);
+            BaseProjectile newProjectile = _projectilePool.GetProjectile(projectileName);
             newProjectile.MoveTo(transform.position);
+            newProjectile.transform.SetParent(transform);
             newProjectile.Launch(enemies[0]);
             StartCoroutine(AttackCooldown(GetCooldown()));
         }
     }
 
-    protected List<BaseEnemy> GetEnemiesInRange()
+    protected List<GameObject> GetEnemiesInRange()
     {
         return OrderEnemies(_inRange);
     }
@@ -94,9 +97,9 @@ public class BaseTowerLevel : MonoBehaviour {
             _attackOrder = EnemiesOrder.End - 1;
     }
 
-    public void TowerUpdate()
+    public void FixedUpdate()
     {
-        List<BaseEnemy> enemies = GetEnemiesInRange();
+        List<GameObject> enemies = GetEnemiesInRange();
         if (enemies.Count > 0)
         {
             Attack(enemies);
@@ -105,14 +108,17 @@ public class BaseTowerLevel : MonoBehaviour {
 
     protected void OnTriggerEnter(Collider other)
     {
-        BaseEnemy enemy = other.GetComponentInParent<BaseEnemy>();
-        // TODO check if we can target the enemy
-        _inRange.Add(enemy);
+        if (other.tag.Contains("Entity"))
+        {
+            BaseEnemy enemy = other.gameObject.GetComponentInParent<BaseEnemy>();
+            // TODO check if we can target the enemy
+            _inRange.Add(other.gameObject);
+        }
     }
 
     protected void OnTriggerExit(Collider other)
     {
-        BaseEnemy enemy = other.GetComponentInParent<BaseEnemy>();
+        GameObject enemy = other.gameObject;
         if (_inRange.Contains(enemy))
         {
             _inRange.Remove(enemy);

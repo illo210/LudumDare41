@@ -43,22 +43,17 @@ public class BaseEntity : MonoBehaviour
         rb.position += Vector3.right * (moveDirection * speed / 7);
     }
 
-    protected virtual void  OnCollisionEnter(Collision collision)
+    protected virtual void OnCollisionEnter(Collision collision)
     {
         if (collision.gameObject.tag.Contains("solid"))
         {
             // Verification that we hit it on the top
-            Ray collisionRay = new Ray(transform.position, collision.transform.position - transform.position);
-
-            RaycastHit collisionRayHit;
-
-            if (Physics.Raycast(collisionRay, out collisionRayHit))
+            Vector3 direction = collision.transform.position - transform.position;
+            direction = Vector3.Normalize(direction);
+            if (direction.y < -0.1f)
             {
-                if (collisionRayHit.normal == Vector3.up)
-                {
-                    isGrounded = true;
-                    hasDoubleJumped = false;
-                }
+                isGrounded = true;
+                hasDoubleJumped = false;
             }
         }
     }

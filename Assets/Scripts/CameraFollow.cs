@@ -9,9 +9,6 @@ public class CameraFollow : MonoBehaviour
 
     void FixedUpdate()
     {
-    
-        float currentHeight = transform.position.y;
-        float currentWidth = transform.position.x;
         transform.position = Vector3.Lerp(transform.position, target.position, Speed);
         transform.position -= Vector3.forward * distance;
         // Always look at the target
