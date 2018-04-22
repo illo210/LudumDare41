@@ -23,10 +23,10 @@ GameObject:
   - component: {fileID: 136412580858254906}
   - component: {fileID: 23585874099281780}
   - component: {fileID: 54715932230175332}
-  - component: {fileID: 114867720282970538}
+  - component: {fileID: 114052630472792932}
   m_Layer: 0
   m_Name: Enemy 1
-  m_TagString: Untagged
+  m_TagString: Entity
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -100,7 +100,7 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 120
   m_CollisionDetection: 0
---- !u!114 &114867720282970538
+--- !u!114 &114052630472792932
 MonoBehaviour:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
@@ -108,11 +108,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 1452872006315136}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 6c170ba2f94202f47b89975168f7ca47, type: 3}
+  m_Script: {fileID: 11500000, guid: 5f47d7f50c720a247aaaf67cdcdfeb42, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   waypoints: []
-  speed: 1
 --- !u!136 &136412580858254906
 CapsuleCollider:
   m_ObjectHideFlags: 1

@@ -4,14 +4,15 @@ using UnityEngine;
 
 public class BaseEntity : MonoBehaviour
 {
-    float speed = 1f;
-    Rigidbody rb;
-    bool isGrounded = false;
-    bool hasDoubleJumped = false;
-    int _health = 3;
+    protected float speed = 1f;
+    protected Rigidbody rb;
+    protected bool isGrounded = false;
+    protected bool hasDoubleJumped = false;
+    protected int _health = 3;
+    protected GameObject _healthBar;
 
     // Use this for initialization
-    void Start()
+   protected virtual void Start()
     {
         rb = GetComponent<Rigidbody>();
         GetHealthBar();
@@ -42,7 +43,7 @@ public class BaseEntity : MonoBehaviour
         rb.position += Vector3.right * (moveDirection * speed / 7);
     }
 
-    protected void OnCollisionEnter(Collision collision)
+    protected virtual void  OnCollisionEnter(Collision collision)
     {
         if (collision.gameObject.tag.Contains("solid"))
         {
@@ -72,13 +73,18 @@ public class BaseEntity : MonoBehaviour
 
     protected virtual void GetHealthBar()
     {
-        GameObject healthBar = Instantiate(GameObject.Find("HealthBar"));
-        UnityEngine.UI.Text text = healthBar.GetComponent<UnityEngine.UI.Text>();
+        _healthBar = Instantiate(GameObject.Find("HealthBar"));
+        UnityEngine.UI.Text text = _healthBar.GetComponent<UnityEngine.UI.Text>();
         text.text = new string('-', _health);
         text.enabled = true;
-        FollowingEntity script = healthBar.GetComponent<FollowingEntity>();
+        FollowingEntity script = _healthBar.GetComponent<FollowingEntity>();
         script.followedEntity = transform;
         script.enabled = true;
-        healthBar.transform.SetParent(GameObject.Find("Canvas").transform);
+        _healthBar.transform.SetParent(GameObject.Find("Canvas").transform);
+    }
+
+    protected virtual void OnDestroy()
+    {
+        Destroy(_healthBar);
     }
 }

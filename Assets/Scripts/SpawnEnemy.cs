@@ -11,7 +11,9 @@ public class SpawnEnemy : MonoBehaviour
     // Use this for initialization
     void Start()
     {
-        Instantiate(testEnemyPrefab).GetComponent<MoveEnemy>().waypoints = waypoints;
+        GameObject enemy = Instantiate(testEnemyPrefab);
+        enemy.GetComponent<BaseEnemy>().waypoints = waypoints;
+        enemy.transform.position = waypoints[0].transform.position;
     }
 
     // Update is called once per frame
