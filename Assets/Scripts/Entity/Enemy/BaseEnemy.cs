@@ -16,7 +16,7 @@ public class BaseEnemy : BaseEntity
     }
 
     // Update is called once per frame
-    void FixedUpdate ()
+    void FixedUpdate()
     {
         // 1 
         Vector3 startPosition = waypoints[currentWaypoint].transform.position;
@@ -34,8 +34,10 @@ public class BaseEnemy : BaseEntity
         float deltaX = endPosition.x - transform.position.x;
         Move(deltaX / Mathf.Abs(deltaX));
         // 3 
-        if (gameObject.transform.position.x < endPosition.x + 0.3f && gameObject.transform.position.x > endPosition.x - 0.3f &&
-            gameObject.transform.position.y < endPosition.y + 0.3f && gameObject.transform.position.y > endPosition.y - 0.3f)
+        if (gameObject.transform.position.x < endPosition.x + 0.3f &&
+            gameObject.transform.position.x > endPosition.x - 0.3f &&
+            gameObject.transform.position.y < endPosition.y + 0.3f &&
+            gameObject.transform.position.y > endPosition.y - 0.3f)
         {
             currentWaypoint++;
             if (currentWaypoint < waypoints.Length - 1)
@@ -64,13 +66,20 @@ public class BaseEnemy : BaseEntity
         {
             Physics.IgnoreCollision(collision.collider, _collider);
         }
+
         if (collision.gameObject.tag.Contains("Base"))
         {
-            Destroy(gameObject);
-
+          //  AnimationClip animDeath = gameObject.GetComponent<AnimationClip>();
+        //    StartCoroutine(Die(animDeath));
             //   AudioSource audioSource = gameObject.GetComponent<AudioSource>();
             //    AudioSource.PlayClipAtPoint(audioSource.clip, transform.position);
             // TODO: deduct health
         }
+    }
+
+    private IEnumerator Die(AnimationClip animDeath)
+    {
+        yield return new WaitForSeconds(animDeath.length);
+        Destroy(gameObject);
     }
 }
