@@ -23,9 +23,10 @@ GameObject:
   - component: {fileID: 212850868147967404}
   - component: {fileID: 65468906395017072}
   - component: {fileID: 95923707557135514}
+  - component: {fileID: 114949835232699116}
   m_Layer: 0
   m_Name: Enemy 1
-  m_TagString: Untagged
+  m_TagString: Entity
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -87,6 +88,19 @@ Animator:
   m_WarningMessage: 
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
+--- !u!114 &114949835232699116
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1151983115319142}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5f47d7f50c720a247aaaf67cdcdfeb42, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  waypoints: []
+  animDeath: {fileID: 7400000, guid: c3eda5290f70e944f80870c48af2a6d9, type: 2}
 --- !u!212 &212850868147967404
 SpriteRenderer:
   m_ObjectHideFlags: 1
