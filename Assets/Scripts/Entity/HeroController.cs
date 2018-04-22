@@ -17,4 +17,9 @@ public class HeroController : BaseEntity {
     {
         return ;
     }
+
+    public override bool CanBeTarget(BaseProjectile projectile)
+    {
+        return false;
+    }
 }

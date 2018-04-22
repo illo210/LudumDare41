@@ -44,21 +44,16 @@ public class ProjectilePool : MonoBehaviour
 
     public BaseProjectile GetProjectile(string projectileTemplate)
     {
-        BaseProjectile tmp = null;
-
         foreach (BaseProjectile projectile in projectileList)
         {
-            if (projectile.IsSameType(projectileTemplate))
+            if (projectile.IsSameType(projectileTemplate) && projectile.IsFree())
             {
-                tmp = projectile;
-                if (projectile.IsFree())
-                {
-                    projectile.Use();
-                    return projectile;
-                }
+                projectile.Use();
+                return projectile;
             }
         }
-        BaseProjectile newProjectile = Instantiate(tmp);
+        GameObject newGameObject = Resources.Load("prefabs/" + projectileTemplate) as GameObject;
+        BaseProjectile newProjectile = newGameObject.GetComponent<BaseProjectile>();
         projectileList.Add(newProjectile);
         newProjectile.Use();
         return newProjectile;

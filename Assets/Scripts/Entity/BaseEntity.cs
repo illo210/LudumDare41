@@ -82,4 +82,9 @@ public class BaseEntity : MonoBehaviour
     {
         Destroy(_healthBar);
     }
+
+    public virtual bool CanBeTarget(BaseProjectile projectile)
+    {
+        return true;
+    }
 }

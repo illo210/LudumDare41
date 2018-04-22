@@ -108,10 +108,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 17201ab528886714384c062717da8271, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  projectile: {fileID: 114843586733983836, guid: 6f077f0a9afd718419d395b5b8ba67db,
-    type: 2}
-  projectilePool: {fileID: 114193046876660080, guid: da5a85560550f694695ed5d14c36ebf4,
-    type: 2}
+  projectileName: BaseProjectile
 --- !u!135 &135114054766684840
 SphereCollider:
   m_ObjectHideFlags: 1
