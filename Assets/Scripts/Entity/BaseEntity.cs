@@ -10,14 +10,16 @@ public class BaseEntity : MonoBehaviour
     protected bool hasDoubleJumped = false;
     protected int _health = 3;
     protected GameObject _healthBar;
-
-    [HideInInspector] public float move = 0;
+    protected Animator _anim;
+    protected Collider _collider;
 
     // Use this for initialization
     protected virtual void Start()
     {
         rb = GetComponent<Rigidbody>();
         GetHealthBar();
+        _anim = gameObject.GetComponent<Animator>();
+        _collider = GetComponent<Collider>();
     }
 
     protected bool CanJump()
@@ -42,7 +44,7 @@ public class BaseEntity : MonoBehaviour
 
     protected void Move(float moveDirection)
     {
-        move = moveDirection;
+        _anim.SetFloat("Move", moveDirection);
         rb.position += Vector3.right * (moveDirection * speed / 7);
     }
 
@@ -58,6 +60,10 @@ public class BaseEntity : MonoBehaviour
                 isGrounded = true;
                 hasDoubleJumped = false;
             }
+        }
+        if (collision.gameObject.tag.Contains("Entity"))
+        {
+            Physics.IgnoreCollision(collision.collider, _collider);
         }
     }
 
