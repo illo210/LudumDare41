@@ -6,13 +6,11 @@ public class BaseEnemy : BaseEntity
 {
     [HideInInspector] public GameObject[] waypoints;
     protected int currentWaypoint = 0;
-    protected Collider _collider;
 
     protected override void Start()
     {
         base.Start();
         speed *= 0.9f;
-        _collider = GetComponent<Collider>();
     }
 
     // Update is called once per frame
@@ -62,25 +60,19 @@ public class BaseEnemy : BaseEntity
     protected override void OnCollisionEnter(Collision collision)
     {
         base.OnCollisionEnter(collision);
-        if (collision.gameObject.tag.Contains("Entity"))
-        {
-            Physics.IgnoreCollision(collision.collider, _collider);
-        }
 
         if (collision.gameObject.tag.Contains("Base"))
         {
-            Animator animDeath = gameObject.GetComponent<Animator>();
-            StartCoroutine(Die(animDeath));
+            StartCoroutine(Die());
             //   AudioSource audioSource = gameObject.GetComponent<AudioSource>();
             //    AudioSource.PlayClipAtPoint(audioSource.clip, transform.position);
             // TODO: deduct health
         }
     }
 
-    private IEnumerator Die(Animator animDeath)
+    private IEnumerator Die()
     {
-        Debug.Log("Deb");
-        animDeath.SetBool("Explode", true);
+        _anim.SetBool("Explode", true);
         yield return new WaitForSeconds(0.8f);
         Destroy(gameObject);
     }
