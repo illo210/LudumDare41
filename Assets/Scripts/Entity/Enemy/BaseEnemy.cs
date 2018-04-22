@@ -69,17 +69,18 @@ public class BaseEnemy : BaseEntity
 
         if (collision.gameObject.tag.Contains("Base"))
         {
-          //  AnimationClip animDeath = gameObject.GetComponent<AnimationClip>();
-        //    StartCoroutine(Die(animDeath));
+            Animator animDeath = gameObject.GetComponent<Animator>();
+            StartCoroutine(Die(animDeath));
             //   AudioSource audioSource = gameObject.GetComponent<AudioSource>();
             //    AudioSource.PlayClipAtPoint(audioSource.clip, transform.position);
             // TODO: deduct health
         }
     }
 
-    private IEnumerator Die(AnimationClip animDeath)
+    private IEnumerator Die(Animator animDeath)
     {
-        yield return new WaitForSeconds(animDeath.length);
+        animDeath.SetBool("Explode", true);
+        yield return new WaitForSeconds(0.8f);
         Destroy(gameObject);
     }
 }
