@@ -27,7 +27,7 @@ GameObject:
   - component: {fileID: 82201635039170180}
   m_Layer: 0
   m_Name: Enemy 1
-  m_TagString: Entity
+  m_TagString: EntityEnemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -180,6 +180,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5f47d7f50c720a247aaaf67cdcdfeb42, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _max_health: 20
   _isAlive: 1
   waypoints: []
 --- !u!212 &212928139077317598

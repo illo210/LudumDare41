@@ -2378,6 +2378,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fb3a1b457f3fa5f4897ab9a4ffacaf21, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _max_health: 0
   _isAlive: 1
 --- !u!82 &1648167000
 AudioSource:

@@ -2,8 +2,8 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class BaseTowerLevel : MonoBehaviour {
-
+public class BaseTowerLevel : BaseEntity
+{
     protected enum EnemiesOrder
     {
         StrongerFirst,
@@ -24,6 +24,7 @@ public class BaseTowerLevel : MonoBehaviour {
 
     protected virtual void Start()
     {
+        base.Start();
         _projectilePool = GameObject.Find("ProjectilePool").GetComponent<ProjectilePool>();
         _range = GetComponent<SphereCollider>();
     }
@@ -65,6 +66,7 @@ public class BaseTowerLevel : MonoBehaviour {
             if (entity && entity._isAlive)
                 inRange.Add(entity);
         }
+
         return OrderEnemies(inRange);
     }
 
@@ -113,11 +115,21 @@ public class BaseTowerLevel : MonoBehaviour {
 
     protected void OnTriggerEnter(Collider other)
     {
-        if (other.tag.Contains("Entity") && !other.tag.Contains("Tower"))
+        if (isGrounded)
         {
-            BaseEntity enemy = other.gameObject.GetComponentInParent<BaseEntity>();
-            if (enemy.CanBeTarget(projectile))
-                _inRange.Add(other.gameObject.GetComponent<BaseEntity>());
+            if (other.tag.Contains("Entity") && !other.tag.Contains("Tower"))
+            {
+                BaseEntity enemy = other.gameObject.GetComponentInParent<BaseEntity>();
+                if (enemy.CanBeTarget(projectile))
+                    _inRange.Add(other.gameObject.GetComponent<BaseEntity>());
+            }
+            Debug.Log(other);
+
+            if (other.tag.Contains("Tower"))
+            {
+                gameManager.Gold += 5;
+                Destroy(other.gameObject);
+            }            
         }
     }
 
@@ -131,5 +143,11 @@ public class BaseTowerLevel : MonoBehaviour {
                 _inRange.Remove(enemy);
             }
         }
+    }
+
+    protected override void OnCollisionEnter(Collision collision)
+    {
+        base.OnCollisionEnter(collision);
+        Debug.Log("lol");
     }
 }

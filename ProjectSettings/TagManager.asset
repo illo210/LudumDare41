@@ -9,6 +9,7 @@ TagManager:
   - Entity
   - Base
   - EntityTower
+  - EntityEnemy
   layers:
   - Default
   - TransparentFX

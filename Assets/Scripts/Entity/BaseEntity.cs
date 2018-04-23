@@ -8,7 +8,8 @@ public class BaseEntity : MonoBehaviour
     protected Rigidbody rb;
     protected bool isGrounded = false;
     protected bool hasDoubleJumped = false;
-    protected int _health = 3;
+    public int _max_health;
+    protected int _health;
     protected GameObject _healthBar;
     protected Animator _anim;
     protected Collider _collider;
@@ -16,11 +17,12 @@ public class BaseEntity : MonoBehaviour
     public bool _isAlive = true;
     protected bool _isInHighlight = false;
     protected Light _highlighter;
-
+    protected SpriteRenderer _sprite;
 
     // Use this for initialization
     protected virtual void Start()
     {
+        _health = _max_health;
         gameManager = GameObject.Find("GameManager").GetComponent<GameManagerBehavior>();
         rb = GetComponent<Rigidbody>();
         GetHealthBar();
@@ -29,6 +31,7 @@ public class BaseEntity : MonoBehaviour
         _highlighter = GetComponentInChildren<Light>();
         if (_highlighter)
             _highlighter.enabled = false;
+        _sprite = GetComponent<SpriteRenderer>();
     }
 
     protected bool CanJump()
@@ -103,7 +106,7 @@ public class BaseEntity : MonoBehaviour
     {
         _healthBar = Instantiate(GameObject.Find("HealthBar"));
         UnityEngine.UI.Text text = _healthBar.GetComponent<UnityEngine.UI.Text>();
-        text.text = new string('-', _health);
+        text.text = new string('-', _health / 10);
         text.enabled = true;
         FollowingEntity script = _healthBar.GetComponent<FollowingEntity>();
         script.followedEntity = transform;
@@ -111,17 +114,22 @@ public class BaseEntity : MonoBehaviour
         _healthBar.transform.SetParent(GameObject.Find("Canvas").transform);
     }
 
-    public void decrease(int amount)
+    public void Decrease(int amount)
     {
         if (_health > amount)
         {
+            _health -= amount;
             UnityEngine.UI.Text text = _healthBar.GetComponent<UnityEngine.UI.Text>();
-            text.text = text.text.Remove(text.text.Length - amount);
-            _health--;
+            text.text = new string('-', _health / 10);
         }
         else
         {
-            Destroy(gameObject);
+            if (_isAlive)
+            {
+                _health = 0;
+                gameManager.Gold += 1;
+                Destroy(gameObject);
+            }
         }
     }
 
@@ -129,7 +137,6 @@ public class BaseEntity : MonoBehaviour
     {
         if (_healthBar)
         {
-            gameManager.Gold += 1;
             Destroy(_healthBar);
         }
     }

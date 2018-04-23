@@ -91,9 +91,13 @@ public class BaseEnemy : BaseEntity
         _isAlive = false;
         _anim.SetBool("Explode", true);
         if (gameManager.Health - 25 <= 0)
+        {
             gameManager.gameOver = true;
+            gameManager.Health = 0;
+        }
         else
             gameManager.Health -= 25;
+
         yield return new WaitForSeconds(0.8f);
         Destroy(gameObject);
     }

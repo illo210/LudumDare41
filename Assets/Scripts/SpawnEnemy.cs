@@ -4,6 +4,13 @@ using UnityEngine;
 
 
 [System.Serializable]
+public class Pattern
+{
+    public GameObject[] enemysPrefab;
+    public float spawnInterval = 2;
+}
+
+[System.Serializable]
 public class Wave
 {
     public GameObject enemyPrefab;
@@ -51,7 +58,7 @@ public class SpawnEnemy : MonoBehaviour
 
             // 4 
             if (enemiesSpawned == waves[currentWave].maxEnemies &&
-                GameObject.FindGameObjectWithTag("Entity") == null)
+                GameObject.FindGameObjectWithTag("EntityEnemy") == null)
             {
                 gameManager.Wave++;
                 gameManager.Gold = Mathf.RoundToInt(gameManager.Gold * 1.1f);
