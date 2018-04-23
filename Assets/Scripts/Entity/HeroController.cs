@@ -45,11 +45,18 @@ public class HeroController : BaseEntity
 
             if (Input.GetKeyDown(KeyCode.Alpha7))
             {
-                Debug.Log(lvl.GetLevelUpPrice());
                 if (lvl.GetLevelUpPrice() != -1 && gameManager.Gold >= lvl.GetLevelUpPrice())
                 {
-                    Debug.Log("Upgrade");
                     gameManager.Gold -= lvl.GetLevelUpPrice();
+                    lvl.LevelUp();
+                }
+            }
+
+            if (Input.GetKeyDown(KeyCode.Alpha8))
+            {
+                if (lvl.GetLevelUpPrice() != -1 && gameManager.Gold >= lvl.GetLevelUpPrice())
+                {
+                    gameManager.Gold += lvl.GetSellPrice();
                     lvl.LevelUp();
                 }
             }

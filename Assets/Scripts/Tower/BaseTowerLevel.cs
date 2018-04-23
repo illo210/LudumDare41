@@ -22,7 +22,7 @@ public class BaseTowerLevel : BaseEntity
     protected List<BaseEntity> _inRange = new List<BaseEntity>();
     protected SphereCollider _range;
 
-    protected virtual void Start()
+    protected override void Start()
     {
         base.Start();
         _projectilePool = GameObject.Find("ProjectilePool").GetComponent<ProjectilePool>();
