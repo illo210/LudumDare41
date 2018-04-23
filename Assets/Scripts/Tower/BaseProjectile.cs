@@ -3,8 +3,8 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class BaseProjectile : MonoBehaviour {
-
+public class BaseProjectile : MonoBehaviour
+{
     protected float speed = 3.0f; // Gotta go fast
     protected bool _isUsed = false;
     protected GameObject _target;
@@ -21,8 +21,8 @@ public class BaseProjectile : MonoBehaviour {
         ProjectilePool pool = ProjectilePool.GetInstance();
         pool.DestroyProjectile(this);
     }
-	
-	void FixedUpdate ()
+
+    void FixedUpdate()
     {
         if (_isUsed)
         {
@@ -30,8 +30,13 @@ public class BaseProjectile : MonoBehaviour {
             {
                 Destroy(gameObject);
             }
-            float distance = Vector3.Distance(transform.position, _target.transform.position);
-            transform.position = Vector3.MoveTowards(transform.position, _target.transform.position, speed / distance);
+
+            if (_target)
+            {
+                float distance = Vector3.Distance(transform.position, _target.transform.position);
+                transform.position =
+                    Vector3.MoveTowards(transform.position, _target.transform.position, speed / distance);
+            }
         }
     }
 

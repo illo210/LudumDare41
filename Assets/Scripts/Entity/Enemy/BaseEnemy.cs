@@ -42,6 +42,7 @@ public class BaseEnemy : BaseEntity
             {
                 // 3.a 
                 // TODO: Rotate into move direction
+             
                 if (waypoints[currentWaypoint].tag == "Jumper")
                 {
                     StartCoroutine(DoubleJump());
@@ -50,11 +51,27 @@ public class BaseEnemy : BaseEntity
         }
     }
 
+    private void RotateIntoMoveDirection()
+    {
+        //1
+        Vector3 newStartPosition = waypoints[currentWaypoint].transform.position;
+        Vector3 newEndPosition = waypoints[currentWaypoint + 1].transform.position;
+        Vector3 newDirection = (newEndPosition - newStartPosition);
+        //2
+        float x = newDirection.x;
+        float y = newDirection.y;
+        float rotationAngle = Mathf.Atan2(y, x) * 180 / Mathf.PI;
+        //3
+        GameObject sprite = gameObject.transform.Find("Sprite").gameObject;
+        sprite.transform.rotation = Quaternion.AngleAxis(rotationAngle, Vector3.forward);
+    }
+
     private IEnumerator DoubleJump()
     {
         Jump();
         yield return new WaitForSeconds(0.1f);
         Jump();
+         // RotateIntoMoveDirection();
     }
 
     protected override void OnCollisionEnter(Collision collision)
@@ -66,7 +83,6 @@ public class BaseEnemy : BaseEntity
             StartCoroutine(Die());
             //   AudioSource audioSource = gameObject.GetComponent<AudioSource>();
             //    AudioSource.PlayClipAtPoint(audioSource.clip, transform.position);
-            // TODO: deduct health
         }
     }
 

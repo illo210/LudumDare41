@@ -12,10 +12,12 @@ public class BaseEntity : MonoBehaviour
     protected GameObject _healthBar;
     protected Animator _anim;
     protected Collider _collider;
+    protected GameManagerBehavior gameManager;
 
     // Use this for initialization
     protected virtual void Start()
     {
+        gameManager = GameObject.Find("GameManager").GetComponent<GameManagerBehavior>();
         rb = GetComponent<Rigidbody>();
         GetHealthBar();
         _anim = gameObject.GetComponent<Animator>();
@@ -98,18 +100,17 @@ public class BaseEntity : MonoBehaviour
         }
         else
         {
-            if (gameObject)
-            {
-                Destroy(gameObject);
-                
-            }
+            Destroy(gameObject);
         }
     }
 
     protected virtual void OnDestroy()
     {
-        Destroy(_healthBar);
-        GameObject.Find("Money").GetComponentInChildren<MoneyManager>().get_money(1);
+        if (_healthBar)
+        {
+            gameManager.Gold += 1;
+            Destroy(_healthBar);
+        }
     }
 
     public virtual bool CanBeTarget(BaseProjectile projectile)
