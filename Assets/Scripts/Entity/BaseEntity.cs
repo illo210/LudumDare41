@@ -101,7 +101,7 @@ public class BaseEntity : MonoBehaviour
             if (gameObject)
             {
                 Destroy(gameObject);
-                GameObject.Find("Money").GetComponentInChildren<MoneyManager>().get_money(1);
+                
             }
         }
     }
@@ -109,6 +109,7 @@ public class BaseEntity : MonoBehaviour
     protected virtual void OnDestroy()
     {
         Destroy(_healthBar);
+        GameObject.Find("Money").GetComponentInChildren<MoneyManager>().get_money(1);
     }
 
     public virtual bool CanBeTarget(BaseProjectile projectile)
