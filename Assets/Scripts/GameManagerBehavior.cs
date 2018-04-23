@@ -7,6 +7,8 @@ public class GameManagerBehavior : MonoBehaviour
 {
     public Text goldLabel;
     public Text waveLabel;
+    public Text UpgradeLabel;
+    public Text sellLabel;
     public bool gameOver = false;
     
     private int gold;
@@ -30,6 +32,36 @@ public class GameManagerBehavior : MonoBehaviour
         {
             wave = value;
             waveLabel.text = "Wave: " + (wave + 1);
+        }
+    }
+
+    public int Upgrade
+    {
+        set
+        {
+            if (value == 0)
+            {
+                UpgradeLabel.text = "";
+            }
+            else
+            {
+                UpgradeLabel.text = value.ToString() + " credits";
+            }
+        }
+    }
+
+    public int Sell
+    {
+        set
+        {
+            if (value == 0)
+            {
+                sellLabel.text = "";
+            }
+            else
+            {
+                sellLabel.text = value.ToString() + " credits";
+            }
         }
     }
 

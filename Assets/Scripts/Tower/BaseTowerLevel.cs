@@ -107,7 +107,6 @@ public class BaseTowerLevel : MonoBehaviour {
         List<BaseEntity> enemies = GetEnemiesInRange();
         if (enemies.Count > 0)
         {
-            Debug.Log(enemies[0]);
             Attack(enemies);
         }
     }
