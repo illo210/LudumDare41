@@ -30,14 +30,15 @@ public class HeroController : BaseEntity
                 gameManager.Gold -= 5;
             }
         }
-        if (_oldTower)
-            _oldTower.DeactiveHiglight();
-        _oldTower = null;
 
         BaseEntity tower = GetActiveTurret();
+        if (_oldTower && tower != _oldTower)
+            _oldTower.DeactiveHiglight();
+        _oldTower = null;
         if (tower)
         {
-            tower.ActiveHiglight();
+            if (tower != _oldTower)
+                tower.ActiveHiglight();
             BaseTower lvl = tower.GetComponent<BaseTower>();
             gameManager.Upgrade = lvl.GetLevelUpPrice();
             gameManager.Sell = lvl.GetLevelUpPrice() / 2;

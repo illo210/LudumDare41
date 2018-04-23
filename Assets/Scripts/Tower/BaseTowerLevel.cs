@@ -122,14 +122,7 @@ public class BaseTowerLevel : BaseEntity
                 BaseEntity enemy = other.gameObject.GetComponentInParent<BaseEntity>();
                 if (enemy.CanBeTarget(projectile))
                     _inRange.Add(other.gameObject.GetComponent<BaseEntity>());
-            }
-            Debug.Log(other);
-
-            if (other.tag.Contains("Tower"))
-            {
-                gameManager.Gold += 5;
-                Destroy(other.gameObject);
-            }            
+            }        
         }
     }
 
@@ -143,11 +136,5 @@ public class BaseTowerLevel : BaseEntity
                 _inRange.Remove(enemy);
             }
         }
-    }
-
-    protected override void OnCollisionEnter(Collision collision)
-    {
-        base.OnCollisionEnter(collision);
-        Debug.Log("lol");
     }
 }

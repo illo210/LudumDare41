@@ -8,6 +8,7 @@ public class BaseTower : BaseEntity {
     public List<int> priceList;
     protected int _level = 0;
     protected GameObject _tower;
+    protected Rigidbody _rb;
 
     protected override void Start()
     {
@@ -15,6 +16,7 @@ public class BaseTower : BaseEntity {
         _tower = Instantiate(levelList[0]);
         _tower.transform.position = transform.position;
         _tower.transform.SetParent(transform);
+        _rb = GetComponent<Rigidbody>();
     }
 
     public int GetLevelUpPrice()
@@ -39,5 +41,22 @@ public class BaseTower : BaseEntity {
     protected override void GetHealthBar()
     {
         return;
+    }
+
+    protected override void OnCollisionEnter(Collision collision)
+    {
+        bool tmpGrounded = isGrounded;
+        base.OnCollisionEnter(collision);
+        if (tmpGrounded == false && isGrounded == true)
+            rb.constraints = RigidbodyConstraints.FreezeAll;
+
+        if (isGrounded)
+        {
+            if (collision.gameObject.tag.Contains("Tower"))
+            {
+                gameManager.Gold += 5;
+                Destroy(collision.gameObject);
+            }
+        }
     }
 }
