@@ -59,7 +59,8 @@ public class SpawnEnemy : MonoBehaviour
             float spawnInterval = waves[currentWave].pattern.Enemies[currentEnemy].spawnInterval;
             if (((enemiesSpawned == 0 && timeInterval > timeBetweenWaves) ||
                  timeInterval > spawnInterval) &&
-                enemiesS < waves[currentWave].pattern.Enemies[currentEnemy].number)
+                enemiesS < waves[currentWave].pattern.Enemies[currentEnemy].number &&
+                enemiesSpawned != waves[currentWave].maxEnemies)
             {
                 if (waves[currentWave].maxEnemies == 0)
                 {
@@ -77,11 +78,10 @@ public class SpawnEnemy : MonoBehaviour
                 enemiesSpawned++;
                 enemiesS++;
                 Debug.Log(enemiesS);
-                if (enemiesS == waves[currentWave].pattern.Enemies[currentEnemy].number &&
-                    currentEnemy + 1 < waves[currentWave].pattern.Enemies.Count)
+                if (enemiesS == waves[currentWave].pattern.Enemies[currentEnemy].number)
                 {
                     enemiesS = 0;
-                    currentEnemy++;
+                    currentEnemy = (currentEnemy + 1) % waves[currentWave].pattern.Enemies.Count;
                     Debug.Log("Current Enemy :" + currentEnemy);
                 }
             }

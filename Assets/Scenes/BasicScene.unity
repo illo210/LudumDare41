@@ -1165,9 +1165,13 @@ MonoBehaviour:
           type: 2}
         number: 2
         spawnInterval: 2.16
-    maxEnemies: 1
+    maxEnemies: 8
   - pattern:
-      Enemies: []
+      Enemies:
+      - enemyPrefab: {fileID: 1072578005588954, guid: c21ca0c5bdf9bf8468cc11737826bd6e,
+          type: 2}
+        number: 1
+        spawnInterval: 2
     maxEnemies: 527
   timeBetweenWaves: 5
 --- !u!4 &737250711
