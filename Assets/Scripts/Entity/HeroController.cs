@@ -10,7 +10,7 @@ public class HeroController : BaseEntity
     {
         float move = Input.GetAxis("Horizontal");
 
-        Move(move);
+        Move(move * Time.deltaTime * 100);
         if (Input.GetButtonDown("Jump"))
         {
             Jump();
@@ -20,7 +20,10 @@ public class HeroController : BaseEntity
                 AudioSource.PlayClipAtPoint(audioSource.clip, transform.position);
             }
         }
-
+        if (Input.GetKeyDown(KeyCode.Alpha2))
+        {
+            ToggleHiglight();
+        }
         if (Input.GetKeyDown(KeyCode.Alpha1))
         {
             if (gameManager.Gold >= 5)
