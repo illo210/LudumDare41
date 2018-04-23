@@ -115,8 +115,6 @@ public class BaseTowerLevel : BaseEntity
 
     protected void OnTriggerEnter(Collider other)
     {
-        if (isGrounded)
-        {
             if (other.tag.Contains("Entity") && !other.tag.Contains("Tower"))
             {
                 BaseEntity enemy = other.gameObject.GetComponentInParent<BaseEntity>();
@@ -129,8 +127,7 @@ public class BaseTowerLevel : BaseEntity
             {
                 gameManager.Gold += 5;
                 Destroy(other.gameObject);
-            }            
-        }
+            } 
     }
 
     protected void OnTriggerExit(Collider other)
