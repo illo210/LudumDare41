@@ -88,6 +88,7 @@ public class BaseEnemy : BaseEntity
 
     private IEnumerator Die()
     {
+        _isAlive = false;
         _anim.SetBool("Explode", true);
         yield return new WaitForSeconds(0.8f);
         Destroy(gameObject);

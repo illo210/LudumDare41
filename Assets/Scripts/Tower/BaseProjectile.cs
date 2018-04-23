@@ -7,17 +7,17 @@ public class BaseProjectile : MonoBehaviour
 {
     protected float speed = 3.0f; // Gotta go fast
     protected bool _isUsed = false;
-    protected GameObject _target;
+    protected BaseEntity _target;
 
-    public void Launch(GameObject enemy)
+    public void Launch(BaseEntity enemy)
     {
         _target = enemy;
     }
 
     public void Explode()
     {
-        // TODO Do damage
-        _target.GetComponent<BaseEntity>().decrease(1);
+        _target.decrease(1);
+        _target = null;
         ProjectilePool pool = ProjectilePool.GetInstance();
         pool.DestroyProjectile(this);
     }
@@ -26,16 +26,18 @@ public class BaseProjectile : MonoBehaviour
     {
         if (_isUsed)
         {
-            if (_target == null)
+            if (!_target._isAlive)
             {
-                Destroy(gameObject);
+                _target = null;
+                ProjectilePool pool = ProjectilePool.GetInstance();
+                pool.DestroyProjectile(this);
             }
 
             if (_target)
             {
-                float distance = Vector3.Distance(transform.position, _target.transform.position);
+                float distance = Vector3.Distance(transform.position, _target.gameObject.transform.position);
                 transform.position =
-                    Vector3.MoveTowards(transform.position, _target.transform.position, speed / distance);
+                    Vector3.MoveTowards(transform.position, _target.gameObject.transform.position, speed / distance);
             }
         }
     }
@@ -79,7 +81,7 @@ public class BaseProjectile : MonoBehaviour
 
     protected void OnTriggerEnter(Collider other)
     {
-        if (other.gameObject == _target)
+        if (_target && other.gameObject == _target.gameObject)
         {
             Explode();
         }

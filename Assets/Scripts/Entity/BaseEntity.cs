@@ -13,6 +13,7 @@ public class BaseEntity : MonoBehaviour
     protected Animator _anim;
     protected Collider _collider;
     protected GameManagerBehavior gameManager;
+    public bool _isAlive = true;
 
     // Use this for initialization
     protected virtual void Start()
@@ -38,7 +39,7 @@ public class BaseEntity : MonoBehaviour
             jump = true;
             if (!isGrounded)
                 hasDoubleJumped = true;
-            rb.velocity += Vector3.up * 20;
+            rb.velocity = new Vector3(rb.velocity.x, 30, rb.velocity.z);
         }
 
         return jump;

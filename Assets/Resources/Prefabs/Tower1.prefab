@@ -20,9 +20,11 @@ GameObject:
   m_Component:
   - component: {fileID: 4740911938227798}
   - component: {fileID: 114462218182731010}
+  - component: {fileID: 54090363280727038}
+  - component: {fileID: 65602261956555202}
   m_Layer: 0
   m_Name: Tower1
-  m_TagString: Untagged
+  m_TagString: EntityTower
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -34,12 +36,39 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1620443187758840}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 12.02, y: 6.68, z: 0}
+  m_LocalPosition: {x: 20.5, y: 13.03, z: -0.96}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!54 &54090363280727038
+Rigidbody:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1620443187758840}
+  serializedVersion: 2
+  m_Mass: 1
+  m_Drag: 0
+  m_AngularDrag: 0.05
+  m_UseGravity: 1
+  m_IsKinematic: 0
+  m_Interpolate: 0
+  m_Constraints: 120
+  m_CollisionDetection: 0
+--- !u!65 &65602261956555202
+BoxCollider:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1620443187758840}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 1, y: 1, z: 1}
+  m_Center: {x: 0, y: 0, z: 0}
 --- !u!114 &114462218182731010
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -51,6 +80,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 831b32bbed3fad94ca4a262d1f59bcce, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _isAlive: 1
   levelList:
   - {fileID: 1456586346081224, guid: e5b1c86a76a8b4749a648af285829135, type: 2}
+  - {fileID: 1411601500285858, guid: 568e8404c9b4a2d4e9a4bc167efd4ea9, type: 2}
   priceList: 05000000
