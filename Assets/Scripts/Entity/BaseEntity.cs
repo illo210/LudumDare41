@@ -15,7 +15,7 @@ public class BaseEntity : MonoBehaviour
     protected GameManagerBehavior gameManager;
     public bool _isAlive = true;
     protected bool _isInHighlight = false;
-    protected SpriteRenderer _sprite;
+    protected Light _highlighter;
 
 
     // Use this for initialization
@@ -26,7 +26,9 @@ public class BaseEntity : MonoBehaviour
         GetHealthBar();
         _anim = gameObject.GetComponent<Animator>();
         _collider = GetComponent<Collider>();
-        _sprite = GetComponent<SpriteRenderer>();
+        _highlighter = GetComponentInChildren<Light>();
+        if (_highlighter)
+            _highlighter.enabled = false;
     }
 
     protected bool CanJump()
@@ -49,24 +51,18 @@ public class BaseEntity : MonoBehaviour
         return jump;
     }
 
-    public void ToggleHiglight()
+    public void ActiveHiglight()
     {
-        Debug.Log("lol");
-        _isInHighlight = !_isInHighlight;
-        if (_isInHighlight)
-        {
-            GameObject highlight = new GameObject("Highlight");
-            highlight.transform.position = transform.position;
-            highlight.transform.SetParent(transform);
-            SpriteRenderer sp = highlight.AddComponent<SpriteRenderer>();
-            sp.sprite = _sprite.sprite;
-            sp.color = new Color(1, 1, 1);
-            highlight.transform.localScale = new Vector3(1.1f, 1.1f, 1.0f);
-        }
-        else
-        {
+        _isInHighlight = true;
+        if (_highlighter)
+            _highlighter.enabled = _isInHighlight;
+    }
 
-        }
+    public void DeactiveHiglight()
+    {
+        _isInHighlight = false;
+        if (_highlighter)
+            _highlighter.enabled = false;
     }
 
     protected void Move(float moveDirection)
