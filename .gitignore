@@ -34,3 +34,4 @@ sysinfo.txt
 *.unitypackage
 .idea/
 Assets/Plugins/
+Assets/Plugins.meta
