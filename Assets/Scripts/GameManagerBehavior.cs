@@ -7,10 +7,11 @@ public class GameManagerBehavior : MonoBehaviour
 {
     public Text goldLabel;
     public Text waveLabel;
+    public Text healthLabel;
     public Text UpgradeLabel;
     public Text sellLabel;
     public bool gameOver = false;
-    
+
     private int gold;
 
     public int Gold
@@ -65,14 +66,32 @@ public class GameManagerBehavior : MonoBehaviour
         }
     }
 
-    // Use this for initialization
+    private int health;
+
+    public int Health
+    {
+        get { return health; }
+        set
+        {
+            health = value;
+            healthLabel.text = health.ToString();
+            if (health <= 0 && !gameOver)
+            {
+                gameOver = true;
+            }
+        }
+    }
+
+
+// Use this for initialization
     void Start()
     {
         Gold = 20;
         Wave = 0;
+        Health = 100;
     }
 
-    // Update is called once per frame
+// Update is called once per frame
     void Update()
     {
     }
