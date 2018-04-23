@@ -2016,7 +2016,6 @@ Prefab:
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 6e3d45db164e76949bd96d7cc1e486dd, type: 2}
   m_IsPrefabParent: 0
->>>>>>> d8fb5821cedc3d7a7b77dba609b594c91eeae9ce
 --- !u!4 &1233650795 stripped
 Transform:
   m_PrefabParentObject: {fileID: 4770784152021940, guid: cf23cf7caa45ef74790fb4de68f6bbdb,
