@@ -998,13 +998,18 @@ MonoBehaviour:
   - {fileID: 1805412625}
   - {fileID: 1580264401}
   waves:
-  - enemyPrefab: {fileID: 1290478514855466, guid: 5231e2129ae35274f89d8e44534f0254,
-      type: 2}
-    spawnInterval: 1.09
+  - pattern:
+      Enemies:
+      - enemyPrefab: {fileID: 1704727808351082, guid: e625a3dba6eec0946a8b55e094bc2f0f,
+          type: 2}
+        number: 319
+        spawnInterval: 2.16
+      - enemyPrefab: {fileID: 0}
+        number: 0
+        spawnInterval: 0
     maxEnemies: 12
-  - enemyPrefab: {fileID: 1290478514855466, guid: 5231e2129ae35274f89d8e44534f0254,
-      type: 2}
-    spawnInterval: 1.03
+  - pattern:
+      Enemies: []
     maxEnemies: 19
   timeBetweenWaves: 5
 --- !u!4 &737250711
@@ -1649,12 +1654,12 @@ Prefab:
     - target: {fileID: 224277251399317646, guid: 6e3d45db164e76949bd96d7cc1e486dd,
         type: 2}
       propertyPath: m_LocalPosition.x
-      value: 219.5
+      value: 218
       objectReference: {fileID: 0}
     - target: {fileID: 224277251399317646, guid: 6e3d45db164e76949bd96d7cc1e486dd,
         type: 2}
       propertyPath: m_LocalPosition.y
-      value: 123.5
+      value: 163
       objectReference: {fileID: 0}
     - target: {fileID: 224277251399317646, guid: 6e3d45db164e76949bd96d7cc1e486dd,
         type: 2}

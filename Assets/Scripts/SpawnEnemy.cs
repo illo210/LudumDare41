@@ -4,10 +4,17 @@ using UnityEngine;
 
 
 [System.Serializable]
+public class Enemy
+{
+    public GameObject enemyPrefab;
+    public int number = 0;
+    public float spawnInterval = 2;
+}
+
+[System.Serializable]
 public class Pattern
 {
-    public GameObject[] enemysPrefab;
-    public float spawnInterval = 2;
+    public Enemy[] Enemies;
 }
 
 [System.Serializable]
@@ -41,16 +48,16 @@ public class SpawnEnemy : MonoBehaviour
         {
             // 2
             float timeInterval = Time.time - lastSpawnTime;
-            float spawnInterval = waves[currentWave].pattern.spawnInterval;
+            float spawnInterval = waves[currentWave].pattern.Enemies[0].spawnInterval;
             if (((enemiesSpawned == 0 && timeInterval > timeBetweenWaves) ||
                  timeInterval > spawnInterval) &&
                 enemiesSpawned < waves[currentWave].maxEnemies)
             {
                 // 3  
                 lastSpawnTime = Time.time;
-                int len_patt = waves[currentWave].pattern.enemysPrefab.Length;
+                int len_patt = waves[currentWave].pattern.Enemies.Length;
                 GameObject newEnemy = (GameObject)
-                    Instantiate(waves[currentWave].pattern.enemysPrefab[1]);
+                    Instantiate(waves[currentWave].pattern.Enemies[0].enemyPrefab);
                 newEnemy.GetComponent<BaseEnemy>().waypoints = waypoints;
                 newEnemy.transform.position = waypoints[0].transform.position;
                 enemiesSpawned++;

@@ -70,8 +70,11 @@ public class BaseEntity : MonoBehaviour
 
     protected void Move(float moveDirection)
     {
-        _anim.SetFloat("Move", moveDirection);
-        rb.position += Vector3.right * (moveDirection * speed / 7);
+        if (_isAlive)
+        {
+            _anim.SetFloat("Move", moveDirection);
+            rb.position += Vector3.right * (moveDirection * speed / 7);
+        }
     }
 
     protected virtual void OnCollisionEnter(Collision collision)
@@ -128,9 +131,17 @@ public class BaseEntity : MonoBehaviour
             {
                 _health = 0;
                 gameManager.Gold += 1;
-                Destroy(gameObject);
+                StartCoroutine(Die());
             }
         }
+    }
+
+    protected virtual IEnumerator Die()
+    {
+        _isAlive = false;
+        _anim.SetBool("Explode", true);
+        yield return new WaitForSeconds(0.9f);
+        Destroy(gameObject);
     }
 
     protected virtual void OnDestroy()

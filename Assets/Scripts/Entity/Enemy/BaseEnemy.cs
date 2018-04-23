@@ -81,24 +81,17 @@ public class BaseEnemy : BaseEntity
         if (collision.gameObject.tag.Contains("Base"))
         {
             StartCoroutine(Die());
+            if (gameManager.Health - 25 <= 0)
+            {
+                gameManager.gameOver = true;
+                gameManager.Health = 0;
+            }
+            else
+                gameManager.Health -= 25;
             AudioSource audioSource = gameObject.GetComponent<AudioSource>();
             AudioSource.PlayClipAtPoint(audioSource.clip, transform.position);
         }
     }
 
-    private IEnumerator Die()
-    {
-        _isAlive = false;
-        _anim.SetBool("Explode", true);
-        if (gameManager.Health - 25 <= 0)
-        {
-            gameManager.gameOver = true;
-            gameManager.Health = 0;
-        }
-        else
-            gameManager.Health -= 25;
-
-        yield return new WaitForSeconds(0.8f);
-        Destroy(gameObject);
-    }
+    
 }

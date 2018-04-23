@@ -26,7 +26,7 @@ GameObject:
   - component: {fileID: 135000632704815126}
   m_Layer: 0
   m_Name: BaseTowerLevel2
-  m_TagString: EntityTower
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
