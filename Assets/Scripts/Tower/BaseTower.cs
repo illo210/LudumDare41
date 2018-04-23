@@ -26,6 +26,13 @@ public class BaseTower : BaseEntity {
         return -1;
     }
 
+    public int GetSellPrice()
+    {
+        if (_level < priceList.Count)
+            return priceList[_level];
+        return -1;
+    }
+
     public void LevelUp()
     {
         if (_level + 1 <= priceList.Count)
