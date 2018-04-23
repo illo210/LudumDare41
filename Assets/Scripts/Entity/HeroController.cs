@@ -7,11 +7,15 @@ public class HeroController : BaseEntity
     protected List<BaseEntity> _inRange = new List<BaseEntity>();
     protected BaseEntity _oldTower;
 
-    void Update()
+    private void FixedUpdate()
     {
         float move = Input.GetAxis("Horizontal");
+        
+        Move(move);
+    }
 
-        Move(move * Time.deltaTime * 100);
+    void Update()
+    {
         if (Input.GetButtonDown("Jump"))
         {
             Jump();
