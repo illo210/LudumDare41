@@ -10,10 +10,14 @@ public class HeroController : BaseEntity
     {
         float move = Input.GetAxis("Horizontal");
 
-        Move(move);
+        Move(move * Time.deltaTime * 100);
         if (Input.GetButtonDown("Jump"))
         {
             Jump();
+        }
+        if (Input.GetKeyDown(KeyCode.Alpha2))
+        {
+            ToggleHiglight();
         }
         if (Input.GetKeyDown(KeyCode.Alpha1))
         {

@@ -113,7 +113,7 @@ public class BaseTowerLevel : MonoBehaviour {
 
     protected void OnTriggerEnter(Collider other)
     {
-        if (other.tag.Contains("Entity"))
+        if (other.tag.Contains("Entity") && !other.tag.Contains("Tower"))
         {
             BaseEntity enemy = other.gameObject.GetComponentInParent<BaseEntity>();
             if (enemy.CanBeTarget(projectile))
@@ -123,7 +123,7 @@ public class BaseTowerLevel : MonoBehaviour {
 
     protected void OnTriggerExit(Collider other)
     {
-        if (other.tag.Contains("Entity"))
+        if (other.tag.Contains("Entity") && !other.tag.Contains("Tower"))
         {
             BaseEntity enemy = other.gameObject.GetComponent<BaseEntity>();
             if (_inRange.Contains(enemy))
