@@ -16,8 +16,8 @@ public class BaseEntity : MonoBehaviour
     protected GameManagerBehavior gameManager;
     public bool _isAlive = true;
     protected bool _isInHighlight = false;
+    protected Light _highlighter;
     protected SpriteRenderer _sprite;
-    private int tmp_heath = 0;
 
     // Use this for initialization
     protected virtual void Start()
@@ -28,7 +28,9 @@ public class BaseEntity : MonoBehaviour
         GetHealthBar();
         _anim = gameObject.GetComponent<Animator>();
         _collider = GetComponent<Collider>();
-        Debug.Log(_collider);
+        _highlighter = GetComponentInChildren<Light>();
+        if (_highlighter)
+            _highlighter.enabled = false;
         _sprite = GetComponent<SpriteRenderer>();
     }
 
@@ -52,23 +54,18 @@ public class BaseEntity : MonoBehaviour
         return jump;
     }
 
-    public void ToggleHiglight()
+    public void ActiveHiglight()
     {
-        Debug.Log("lol");
-        _isInHighlight = !_isInHighlight;
-        if (_isInHighlight)
-        {
-            GameObject highlight = new GameObject("Highlight");
-            highlight.transform.position = transform.position;
-            highlight.transform.SetParent(transform);
-            SpriteRenderer sp = highlight.AddComponent<SpriteRenderer>();
-            sp.sprite = _sprite.sprite;
-            sp.color = new Color(1, 1, 1);
-            highlight.transform.localScale = new Vector3(1.1f, 1.1f, 1.0f);
-        }
-        else
-        {
-        }
+        _isInHighlight = true;
+        if (_highlighter)
+            _highlighter.enabled = _isInHighlight;
+    }
+
+    public void DeactiveHiglight()
+    {
+        _isInHighlight = false;
+        if (_highlighter)
+            _highlighter.enabled = false;
     }
 
     protected void Move(float moveDirection)
@@ -117,22 +114,22 @@ public class BaseEntity : MonoBehaviour
         _healthBar.transform.SetParent(GameObject.Find("Canvas").transform);
     }
 
-    public void decrease(int amount)
+    public void Decrease(int amount)
     {
         if (_health > amount)
         {
-            _health--;
-            tmp_heath++;
-            if (tmp_heath == 10)
-            {
-                UnityEngine.UI.Text text = _healthBar.GetComponent<UnityEngine.UI.Text>();
-                text.text = text.text.Remove(text.text.Length - amount);
-                tmp_heath = 0;
-            }
+            _health -= amount;
+            UnityEngine.UI.Text text = _healthBar.GetComponent<UnityEngine.UI.Text>();
+            text.text = new string('-', _health / 10);
         }
         else
         {
-            Destroy(gameObject);
+            if (_isAlive)
+            {
+                _health = 0;
+                gameManager.Gold += 1;
+                Destroy(gameObject);
+            }
         }
     }
 
@@ -140,7 +137,6 @@ public class BaseEntity : MonoBehaviour
     {
         if (_healthBar)
         {
-            gameManager.Gold += 1;
             Destroy(_healthBar);
         }
     }

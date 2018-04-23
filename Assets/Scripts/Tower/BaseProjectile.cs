@@ -16,7 +16,7 @@ public class BaseProjectile : MonoBehaviour
 
     public void Explode()
     {
-        _target.decrease(1);
+        _target.Decrease(1);
         _target = null;
         ProjectilePool pool = ProjectilePool.GetInstance();
         pool.DestroyProjectile(this);

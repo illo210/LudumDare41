@@ -5,6 +5,7 @@ using UnityEngine;
 public class HeroController : BaseEntity
 {
     protected List<BaseEntity> _inRange = new List<BaseEntity>();
+    protected BaseEntity _oldTower;
 
     void Update()
     {
@@ -20,10 +21,6 @@ public class HeroController : BaseEntity
                 AudioSource.PlayClipAtPoint(audioSource.clip, transform.position);
             }
         }
-        if (Input.GetKeyDown(KeyCode.Alpha2))
-        {
-            ToggleHiglight();
-        }
         if (Input.GetKeyDown(KeyCode.Alpha1))
         {
             if (gameManager.Gold >= 5)
@@ -35,8 +32,13 @@ public class HeroController : BaseEntity
         }
 
         BaseEntity tower = GetActiveTurret();
+        if (_oldTower && tower != _oldTower)
+            _oldTower.DeactiveHiglight();
+        _oldTower = null;
         if (tower)
         {
+            if (tower != _oldTower)
+                tower.ActiveHiglight();
             BaseTower lvl = tower.GetComponent<BaseTower>();
             gameManager.Upgrade = lvl.GetLevelUpPrice();
             gameManager.Sell = lvl.GetLevelUpPrice() / 2;
@@ -51,6 +53,7 @@ public class HeroController : BaseEntity
                     lvl.LevelUp();
                 }
             }
+            _oldTower = tower;
         }
         else
         {
