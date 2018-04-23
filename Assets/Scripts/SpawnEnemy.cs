@@ -31,7 +31,9 @@ public class SpawnEnemy : MonoBehaviour
     public int timeBetweenWaves = 5;
     private float lastSpawnTime;
     protected GameManagerBehavior gameManager;
-    private int enemiesSpawned = 0;
+    private int enemiesSpawned, enemiesS = 0;
+    private int currentEnemy = 0;
+
 
     // Use this for initialization
     void Start()
@@ -48,19 +50,28 @@ public class SpawnEnemy : MonoBehaviour
         {
             // 2
             float timeInterval = Time.time - lastSpawnTime;
-            float spawnInterval = waves[currentWave].pattern.Enemies[0].spawnInterval;
+            float spawnInterval = waves[currentWave].pattern.Enemies[currentEnemy].spawnInterval;
             if (((enemiesSpawned == 0 && timeInterval > timeBetweenWaves) ||
                  timeInterval > spawnInterval) &&
-                enemiesSpawned < waves[currentWave].maxEnemies)
+                enemiesSpawned < waves[currentWave].pattern.Enemies[currentEnemy].number)
             {
                 // 3  
                 lastSpawnTime = Time.time;
-                int len_patt = waves[currentWave].pattern.Enemies.Length;
+
                 GameObject newEnemy = (GameObject)
-                    Instantiate(waves[currentWave].pattern.Enemies[0].enemyPrefab);
+                    Instantiate(waves[currentWave].pattern.Enemies[currentEnemy].enemyPrefab);
                 newEnemy.GetComponent<BaseEnemy>().waypoints = waypoints;
                 newEnemy.transform.position = waypoints[0].transform.position;
                 enemiesSpawned++;
+                enemiesS++;
+                Debug.Log(enemiesS);
+                if (enemiesS == waves[currentWave].pattern.Enemies[currentEnemy].number &&
+                    waves[currentWave].pattern.Enemies[currentEnemy + 1] != null)
+                {
+                    enemiesS = 0;
+                    currentEnemy++;
+                    Debug.Log("Current Enemy :" + currentEnemy);
+                }
             }
 
             // 4 
