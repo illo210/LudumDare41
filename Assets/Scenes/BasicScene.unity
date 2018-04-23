@@ -1008,18 +1008,15 @@ MonoBehaviour:
   - {fileID: 1932588936}
   - {fileID: 1805412625}
   - {fileID: 1580264401}
-  testEnemyPrefab: {fileID: 1290478514855466, guid: 5231e2129ae35274f89d8e44534f0254,
-    type: 2}
   waves:
-  - enemyPrefab: {fileID: 0}
-    spawnInterval: 0
-    maxEnemies: 0
-  - enemyPrefab: {fileID: 0}
-    spawnInterval: 0
-    maxEnemies: 0
-  - enemyPrefab: {fileID: 0}
-    spawnInterval: 0
-    maxEnemies: 0
+  - enemyPrefab: {fileID: 1290478514855466, guid: 5231e2129ae35274f89d8e44534f0254,
+      type: 2}
+    spawnInterval: 0.21
+    maxEnemies: 12
+  - enemyPrefab: {fileID: 1290478514855466, guid: 5231e2129ae35274f89d8e44534f0254,
+      type: 2}
+    spawnInterval: 0.55
+    maxEnemies: 19
   timeBetweenWaves: 5
 --- !u!4 &737250711
 Transform:
@@ -2241,7 +2238,7 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1368827395}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -6.33, y: 1.69, z: -0.79}
+  m_LocalPosition: {x: -6.33, y: 2.23, z: -0.79}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 737250711}
@@ -2433,8 +2430,6 @@ MonoBehaviour:
   - {fileID: 1791562848}
   - {fileID: 19728458}
   - {fileID: 1580264401}
-  testEnemyPrefab: {fileID: 1290478514855466, guid: 5231e2129ae35274f89d8e44534f0254,
-    type: 2}
   waves: []
   timeBetweenWaves: 5
 --- !u!1 &1648166993
@@ -2743,7 +2738,7 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1932588936}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 24.3, y: 14.74, z: -1.34}
+  m_LocalPosition: {x: 24.9, y: 14.74, z: -1.34}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 737250711}

@@ -14,7 +14,6 @@ public class Wave
 public class SpawnEnemy : MonoBehaviour
 {
     public GameObject[] waypoints;
-    public GameObject testEnemyPrefab;
     public Wave[] waves;
     public int timeBetweenWaves = 5;
     private float lastSpawnTime;
@@ -26,9 +25,6 @@ public class SpawnEnemy : MonoBehaviour
     {
         gameManager = GameObject.Find("GameManager").GetComponent<GameManagerBehavior>();
         lastSpawnTime = Time.time;
-        GameObject enemy = Instantiate(testEnemyPrefab);
-        enemy.GetComponent<BaseEnemy>().waypoints = waypoints;
-        enemy.transform.position = waypoints[0].transform.position;
     }
 
     // Update is called once per frame
@@ -49,6 +45,7 @@ public class SpawnEnemy : MonoBehaviour
                 GameObject newEnemy = (GameObject)
                     Instantiate(waves[currentWave].enemyPrefab);
                 newEnemy.GetComponent<BaseEnemy>().waypoints = waypoints;
+                newEnemy.transform.position = waypoints[0].transform.position;
                 enemiesSpawned++;
             }
 
