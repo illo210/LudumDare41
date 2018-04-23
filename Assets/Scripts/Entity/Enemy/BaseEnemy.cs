@@ -7,9 +7,9 @@ public class BaseEnemy : BaseEntity
     [HideInInspector] public GameObject[] waypoints;
     protected int currentWaypoint = 0;
 
-    protected override void Start()
+    protected override void Awake()
     {
-        base.Start();
+        base.Awake();
         speed *= 0.9f;
     }
 

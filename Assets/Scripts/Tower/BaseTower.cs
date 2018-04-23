@@ -9,13 +9,15 @@ public class BaseTower : BaseEntity {
     protected int _level = 0;
     protected GameObject _tower;
     protected Rigidbody _rb;
+    protected UnityEngine.UI.Image _baseSprite;
 
-    protected override void Start()
+    protected override void Awake()
     {
-        base.Start();
+        base.Awake();
         _tower = Instantiate(levelList[0]);
         _tower.transform.position = transform.position;
         _tower.transform.SetParent(transform);
+        _baseSprite = _tower.GetComponent<BaseTowerLevel>().GetSprite();
         _rb = GetComponent<Rigidbody>();
     }
 
@@ -48,6 +50,21 @@ public class BaseTower : BaseEntity {
     protected override void GetHealthBar()
     {
         return;
+    }
+
+    public UnityEngine.UI.Image GetSprite()
+    {
+        return _tower.GetComponent<BaseTowerLevel>().GetSprite();
+    }
+
+    public UnityEngine.UI.Image GetBaseSprite()
+    {
+        return _baseSprite;
+    }
+
+    public string GetName()
+    {
+        return _tower.GetComponent<BaseTowerLevel>().GetName();
     }
 
     protected override void OnCollisionEnter(Collision collision)

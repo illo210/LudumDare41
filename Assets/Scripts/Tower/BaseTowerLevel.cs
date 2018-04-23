@@ -21,10 +21,12 @@ public class BaseTowerLevel : BaseEntity
     protected EnemiesOrder _attackOrder;
     protected List<BaseEntity> _inRange = new List<BaseEntity>();
     protected SphereCollider _range;
+    protected UnityEngine.UI.Image _sp;
 
-    protected override void Start()
+    protected override void Awake()
     {
-        base.Start();
+        base.Awake();
+        _sp = GetComponent<UnityEngine.UI.Image>();
         _projectilePool = GameObject.Find("ProjectilePool").GetComponent<ProjectilePool>();
         _range = GetComponent<SphereCollider>();
     }
@@ -56,6 +58,16 @@ public class BaseTowerLevel : BaseEntity
             newProjectile.Launch(enemies[0]);
             StartCoroutine(AttackCooldown(GetCooldown()));
         }
+    }
+
+    public UnityEngine.UI.Image GetSprite()
+    {
+        return _sp;
+    }
+
+    public virtual string GetName()
+    {
+        return "baseTower";
     }
 
     protected List<BaseEntity> GetEnemiesInRange()
