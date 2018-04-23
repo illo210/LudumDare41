@@ -14,7 +14,7 @@ public class Enemy
 [System.Serializable]
 public class Pattern
 {
-    public Enemy[] Enemies;
+    public List<Enemy> Enemies;
 }
 
 [System.Serializable]
@@ -72,7 +72,7 @@ public class SpawnEnemy : MonoBehaviour
                 enemiesS++;
                 Debug.Log(enemiesS);
                 if (enemiesS == waves[currentWave].pattern.Enemies[currentEnemy].number &&
-                    waves[currentWave].pattern.Enemies[currentEnemy + 1] != null)
+                    currentEnemy + 1 < waves[currentWave].pattern.Enemies.Count)
                 {
                     enemiesS = 0;
                     currentEnemy++;
