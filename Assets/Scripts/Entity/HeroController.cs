@@ -16,6 +16,7 @@ public class HeroController : BaseEntity
 
     void Update()
     {
+        int input = 0;
         if (Input.GetButtonDown("Jump"))
         {
             Jump();
@@ -26,12 +27,22 @@ public class HeroController : BaseEntity
             }
         }
         if (Input.GetKeyDown(KeyCode.Alpha1))
+            input = 1;
+        if (Input.GetKeyDown(KeyCode.Alpha2))
+            input = 2;
+        if (Input.GetKeyDown(KeyCode.Alpha3))
+            input = 3;
+        if (Input.GetKeyDown(KeyCode.Alpha4))
+            input = 4;
+        if (Input.GetKeyDown(KeyCode.Alpha5))
+            input = 5;
+        if (input != 0)
         {
-            if (gameManager.Gold >= 5)
+            if (gameManager.Gold > gameManager.BaseTowerList[input - 1].GetLevelUpPrice())
             {
-                GameObject newTower = Instantiate(Resources.Load("Prefabs/" + "Tower1") as GameObject);
+                GameObject newTower = Instantiate(gameManager.BaseTowerList[input - 1].gameObject);
                 newTower.transform.position = transform.position;
-                gameManager.Gold -= 5;
+                gameManager.Gold -= gameManager.BaseTowerList[input - 1].GetLevelUpPrice();
             }
         }
 
@@ -60,7 +71,10 @@ public class HeroController : BaseEntity
                 gameManager.Gold += lvl.GetSellPrice();
                 Destroy(lvl.gameObject);
             }
-            _oldTower = tower;
+            else
+            {
+                _oldTower = tower;
+            }
         }
         else
         {
@@ -83,6 +97,7 @@ public class HeroController : BaseEntity
     {
         if (_inRange.Count <= 0)
             return null;
+        _inRange.RemoveAll(item => item == null);
         _inRange.Sort((p1, p2) => Vector3.Distance(p1.transform.position, transform.position)
             .CompareTo(Vector3.Distance(p2.transform.position, transform.position)));
         return _inRange[0];

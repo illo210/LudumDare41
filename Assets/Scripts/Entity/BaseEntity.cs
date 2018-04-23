@@ -20,7 +20,7 @@ public class BaseEntity : MonoBehaviour
     protected SpriteRenderer _sprite;
 
     // Use this for initialization
-    protected virtual void Start()
+    protected virtual void Awake()
     {
         _health = _max_health;
         gameManager = GameObject.Find("GameManager").GetComponent<GameManagerBehavior>();
