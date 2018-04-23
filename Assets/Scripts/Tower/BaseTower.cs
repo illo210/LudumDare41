@@ -21,15 +21,15 @@ public class BaseTower : BaseEntity {
 
     public int GetLevelUpPrice()
     {
-        if (_level < priceList.Count)
-            return priceList[_level];
+        if (_level + 1 < priceList.Count)
+            return priceList[_level + 1];
         return -1;
     }
 
     public int GetSellPrice()
     {
         if (_level < priceList.Count)
-            return priceList[_level];
+            return priceList[_level] / 2;
         return -1;
     }
 

@@ -41,7 +41,7 @@ public class HeroController : BaseEntity
                 tower.ActiveHiglight();
             BaseTower lvl = tower.GetComponent<BaseTower>();
             gameManager.Upgrade = lvl.GetLevelUpPrice();
-            gameManager.Sell = lvl.GetLevelUpPrice() / 2;
+            gameManager.Sell = lvl.GetSellPrice();
 
             if (Input.GetKeyDown(KeyCode.Alpha7))
             {
@@ -51,14 +51,10 @@ public class HeroController : BaseEntity
                     lvl.LevelUp();
                 }
             }
-
             if (Input.GetKeyDown(KeyCode.Alpha8))
             {
-                if (lvl.GetLevelUpPrice() != -1 && gameManager.Gold >= lvl.GetLevelUpPrice())
-                {
-                    gameManager.Gold += lvl.GetSellPrice();
-                    lvl.LevelUp();
-                }
+                gameManager.Gold += lvl.GetSellPrice();
+                Destroy(lvl.gameObject);
             }
             _oldTower = tower;
         }

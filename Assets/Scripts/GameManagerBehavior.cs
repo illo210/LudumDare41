@@ -44,6 +44,10 @@ public class GameManagerBehavior : MonoBehaviour
             {
                 UpgradeLabel.text = "";
             }
+            else if (value == -1)
+            {
+                UpgradeLabel.text = "Max upgraded";
+            }
             else
             {
                 UpgradeLabel.text = value.ToString() + " credits";
