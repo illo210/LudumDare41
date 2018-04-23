@@ -656,6 +656,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   goldLabel: {fileID: 503970401}
   waveLabel: {fileID: 1104801505}
+  UpgradeLabel: {fileID: 0}
+  sellLabel: {fileID: 0}
   gameOver: 0
 --- !u!4 &334576720
 Transform:
@@ -794,29 +796,12 @@ Transform:
   m_Father: {fileID: 1643605708}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!1 &503970398 stripped
-GameObject:
-  m_PrefabParentObject: {fileID: 1613419761465794, guid: 6e3d45db164e76949bd96d7cc1e486dd,
-    type: 2}
-  m_PrefabInternal: {fileID: 1220387678}
 --- !u!114 &503970401 stripped
 MonoBehaviour:
   m_PrefabParentObject: {fileID: 114729412476034406, guid: 6e3d45db164e76949bd96d7cc1e486dd,
     type: 2}
   m_PrefabInternal: {fileID: 1220387678}
   m_Script: {fileID: 708705254, guid: f5f67c52d1564df4a8936ccd202a3bd8, type: 3}
---- !u!114 &503970402
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 503970398}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 6d1a54a780ba92b4992f7c207c3fa568, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  money: 100
 --- !u!1 &528113521
 GameObject:
   m_ObjectHideFlags: 0
@@ -1011,11 +996,11 @@ MonoBehaviour:
   waves:
   - enemyPrefab: {fileID: 1290478514855466, guid: 5231e2129ae35274f89d8e44534f0254,
       type: 2}
-    spawnInterval: 0.21
+    spawnInterval: 2.13
     maxEnemies: 12
   - enemyPrefab: {fileID: 1290478514855466, guid: 5231e2129ae35274f89d8e44534f0254,
       type: 2}
-    spawnInterval: 0.55
+    spawnInterval: 2.3
     maxEnemies: 19
   timeBetweenWaves: 5
 --- !u!4 &737250711
@@ -1823,42 +1808,42 @@ Prefab:
     - target: {fileID: 224248743226580444, guid: 6e3d45db164e76949bd96d7cc1e486dd,
         type: 2}
       propertyPath: m_LocalPosition.x
-      value: 390
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 224248743226580444, guid: 6e3d45db164e76949bd96d7cc1e486dd,
         type: 2}
       propertyPath: m_LocalPosition.y
-      value: -146
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 224510067166607698, guid: 6e3d45db164e76949bd96d7cc1e486dd,
         type: 2}
       propertyPath: m_LocalPosition.x
-      value: -374.6
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 224510067166607698, guid: 6e3d45db164e76949bd96d7cc1e486dd,
         type: 2}
       propertyPath: m_LocalPosition.y
-      value: -87
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 224255973780968442, guid: 6e3d45db164e76949bd96d7cc1e486dd,
         type: 2}
       propertyPath: m_LocalPosition.x
-      value: -260.3
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 224255973780968442, guid: 6e3d45db164e76949bd96d7cc1e486dd,
         type: 2}
       propertyPath: m_LocalPosition.y
-      value: 211.1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 224365050853650058, guid: 6e3d45db164e76949bd96d7cc1e486dd,
         type: 2}
       propertyPath: m_LocalPosition.x
-      value: -381
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 224365050853650058, guid: 6e3d45db164e76949bd96d7cc1e486dd,
         type: 2}
       propertyPath: m_LocalPosition.y
-      value: 209.7
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 114326890087787562, guid: 6e3d45db164e76949bd96d7cc1e486dd,
         type: 2}
@@ -2564,6 +2549,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fb3a1b457f3fa5f4897ab9a4ffacaf21, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _isAlive: 1
 --- !u!1 &1791562848
 GameObject:
   m_ObjectHideFlags: 0

@@ -42,7 +42,7 @@ public class BaseEnemy : BaseEntity
             {
                 // 3.a 
                 // TODO: Rotate into move direction
-             
+
                 if (waypoints[currentWaypoint].tag == "Jumper")
                 {
                     StartCoroutine(DoubleJump());
@@ -71,7 +71,7 @@ public class BaseEnemy : BaseEntity
         Jump();
         yield return new WaitForSeconds(0.1f);
         Jump();
-         // RotateIntoMoveDirection();
+        // RotateIntoMoveDirection();
     }
 
     protected override void OnCollisionEnter(Collision collision)
@@ -81,8 +81,8 @@ public class BaseEnemy : BaseEntity
         if (collision.gameObject.tag.Contains("Base"))
         {
             StartCoroutine(Die());
-            //   AudioSource audioSource = gameObject.GetComponent<AudioSource>();
-            //    AudioSource.PlayClipAtPoint(audioSource.clip, transform.position);
+            AudioSource audioSource = gameObject.GetComponent<AudioSource>();
+            AudioSource.PlayClipAtPoint(audioSource.clip, transform.position);
         }
     }
 
