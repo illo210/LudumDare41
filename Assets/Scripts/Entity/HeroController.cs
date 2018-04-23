@@ -14,7 +14,13 @@ public class HeroController : BaseEntity
         if (Input.GetButtonDown("Jump"))
         {
             Jump();
+            if (CanJump())
+            {
+                AudioSource audioSource = gameObject.GetComponent<AudioSource>();
+                AudioSource.PlayClipAtPoint(audioSource.clip, transform.position);
+            }
         }
+
         if (Input.GetKeyDown(KeyCode.Alpha1))
         {
             if (gameManager.Gold >= 5)
@@ -24,6 +30,7 @@ public class HeroController : BaseEntity
                 gameManager.Gold -= 5;
             }
         }
+
         BaseEntity tower = GetActiveTurret();
         if (tower)
         {
@@ -47,7 +54,6 @@ public class HeroController : BaseEntity
             gameManager.Upgrade = 0;
             gameManager.Sell = 0;
         }
-
     }
 
     protected override void GetHealthBar()
@@ -64,7 +70,8 @@ public class HeroController : BaseEntity
     {
         if (_inRange.Count <= 0)
             return null;
-        _inRange.Sort((p1, p2)=> Vector3.Distance(p1.transform.position, transform.position).CompareTo(Vector3.Distance(p2.transform.position, transform.position)));
+        _inRange.Sort((p1, p2) => Vector3.Distance(p1.transform.position, transform.position)
+            .CompareTo(Vector3.Distance(p2.transform.position, transform.position)));
         return _inRange[0];
     }
 
