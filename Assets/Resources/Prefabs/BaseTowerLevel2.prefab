@@ -20,13 +20,13 @@ GameObject:
   m_Component:
   - component: {fileID: 4187015743226752}
   - component: {fileID: 33232515307020524}
-  - component: {fileID: 65227929554079126}
   - component: {fileID: 23753381380127060}
   - component: {fileID: 114800858982792208}
+  - component: {fileID: 65935917163801522}
   - component: {fileID: 135000632704815126}
   m_Layer: 0
   m_Name: BaseTowerLevel2
-  m_TagString: Entity
+  m_TagString: EntityTower
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -85,7 +85,7 @@ MeshFilter:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1411601500285858}
   m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
---- !u!65 &65227929554079126
+--- !u!65 &65935917163801522
 BoxCollider:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
@@ -108,6 +108,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 17201ab528886714384c062717da8271, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _max_health: 0
+  _isAlive: 1
   projectile: {fileID: 114843586733983836, guid: 6f077f0a9afd718419d395b5b8ba67db,
     type: 2}
 --- !u!135 &135000632704815126

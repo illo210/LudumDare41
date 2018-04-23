@@ -8,7 +8,8 @@ public class BaseEntity : MonoBehaviour
     protected Rigidbody rb;
     protected bool isGrounded = false;
     protected bool hasDoubleJumped = false;
-    protected int _health = 3;
+    public int _max_health;
+    protected int _health;
     protected GameObject _healthBar;
     protected Animator _anim;
     protected Collider _collider;
@@ -16,16 +17,18 @@ public class BaseEntity : MonoBehaviour
     public bool _isAlive = true;
     protected bool _isInHighlight = false;
     protected SpriteRenderer _sprite;
-
+    private int tmp_heath = 0;
 
     // Use this for initialization
     protected virtual void Start()
     {
+        _health = _max_health;
         gameManager = GameObject.Find("GameManager").GetComponent<GameManagerBehavior>();
         rb = GetComponent<Rigidbody>();
         GetHealthBar();
         _anim = gameObject.GetComponent<Animator>();
         _collider = GetComponent<Collider>();
+        Debug.Log(_collider);
         _sprite = GetComponent<SpriteRenderer>();
     }
 
@@ -65,7 +68,6 @@ public class BaseEntity : MonoBehaviour
         }
         else
         {
-
         }
     }
 
@@ -107,7 +109,7 @@ public class BaseEntity : MonoBehaviour
     {
         _healthBar = Instantiate(GameObject.Find("HealthBar"));
         UnityEngine.UI.Text text = _healthBar.GetComponent<UnityEngine.UI.Text>();
-        text.text = new string('-', _health);
+        text.text = new string('-', _health / 10);
         text.enabled = true;
         FollowingEntity script = _healthBar.GetComponent<FollowingEntity>();
         script.followedEntity = transform;
@@ -119,9 +121,14 @@ public class BaseEntity : MonoBehaviour
     {
         if (_health > amount)
         {
-            UnityEngine.UI.Text text = _healthBar.GetComponent<UnityEngine.UI.Text>();
-            text.text = text.text.Remove(text.text.Length - amount);
             _health--;
+            tmp_heath++;
+            if (tmp_heath == 10)
+            {
+                UnityEngine.UI.Text text = _healthBar.GetComponent<UnityEngine.UI.Text>();
+                text.text = text.text.Remove(text.text.Length - amount);
+                tmp_heath = 0;
+            }
         }
         else
         {

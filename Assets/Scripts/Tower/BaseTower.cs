@@ -11,6 +11,7 @@ public class BaseTower : BaseEntity {
 
     protected override void Start()
     {
+        base.Start();
         _tower = Instantiate(levelList[0]);
         _tower.transform.position = transform.position;
         _tower.transform.SetParent(transform);
