@@ -106,7 +106,7 @@ public class GameManagerBehavior : MonoBehaviour
             GameObject name = template.transform.Find("Name").gameObject;
             name.GetComponent<Text>().text = tower.GetName() + " : " + tmp.ToString();
             GameObject price = template.transform.Find("Price").gameObject;
-            price.GetComponent<Text>().text = tower.GetSellPrice() + " Credits";
+            price.GetComponent<Text>().text = tower.GetLevelUpPrice() + " Credits";
             GameObject image = template.transform.Find("Image").gameObject;
             Image i = image.GetComponent<Image>();
             i.color = tower.GetBaseSprite().color;
