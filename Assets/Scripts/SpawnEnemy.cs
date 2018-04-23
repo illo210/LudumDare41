@@ -14,7 +14,7 @@ public class Enemy
 [System.Serializable]
 public class Pattern
 {
-    public Enemy[] Enemies;
+    public List<Enemy> Enemies;
 }
 
 [System.Serializable]
@@ -53,7 +53,7 @@ public class SpawnEnemy : MonoBehaviour
             float spawnInterval = waves[currentWave].pattern.Enemies[currentEnemy].spawnInterval;
             if (((enemiesSpawned == 0 && timeInterval > timeBetweenWaves) ||
                  timeInterval > spawnInterval) &&
-                enemiesSpawned < waves[currentWave].pattern.Enemies[currentEnemy].number)
+                enemiesS < waves[currentWave].pattern.Enemies[currentEnemy].number)
             {
                 // 3  
                 lastSpawnTime = Time.time;
@@ -66,7 +66,7 @@ public class SpawnEnemy : MonoBehaviour
                 enemiesS++;
                 Debug.Log(enemiesS);
                 if (enemiesS == waves[currentWave].pattern.Enemies[currentEnemy].number &&
-                    waves[currentWave].pattern.Enemies[currentEnemy + 1] != null)
+                    currentEnemy + 1 < waves[currentWave].pattern.Enemies.Count)
                 {
                     enemiesS = 0;
                     currentEnemy++;
