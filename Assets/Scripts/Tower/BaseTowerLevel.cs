@@ -19,7 +19,7 @@ public class BaseTowerLevel : MonoBehaviour {
     protected ProjectilePool _projectilePool;
     protected bool _canAttack = true;
     protected EnemiesOrder _attackOrder;
-    protected List<GameObject> _inRange = new List<GameObject>();
+    protected List<BaseEntity> _inRange = new List<BaseEntity>();
     protected SphereCollider _range;
 
     protected virtual void Start()
@@ -39,12 +39,12 @@ public class BaseTowerLevel : MonoBehaviour {
         _canAttack = true;
     }
 
-    protected List<GameObject> OrderEnemies(List<GameObject> enemies)
+    protected List<BaseEntity> OrderEnemies(List<BaseEntity> enemies)
     {
         return enemies;
     }
 
-    protected void Attack(List<GameObject> enemies)
+    protected void Attack(List<BaseEntity> enemies)
     {
         if (_canAttack)
         {
@@ -57,9 +57,15 @@ public class BaseTowerLevel : MonoBehaviour {
         }
     }
 
-    protected List<GameObject> GetEnemiesInRange()
+    protected List<BaseEntity> GetEnemiesInRange()
     {
-        return OrderEnemies(_inRange);
+        List<BaseEntity> inRange = new List<BaseEntity>();
+        foreach (BaseEntity entity in _inRange)
+        {
+            if (entity && entity._isAlive)
+                inRange.Add(entity);
+        }
+        return OrderEnemies(inRange);
     }
 
     protected List<EnemiesOrder> GetEnemiesOrder()
@@ -98,9 +104,10 @@ public class BaseTowerLevel : MonoBehaviour {
 
     public void FixedUpdate()
     {
-        List<GameObject> enemies = GetEnemiesInRange();
+        List<BaseEntity> enemies = GetEnemiesInRange();
         if (enemies.Count > 0)
         {
+            Debug.Log(enemies[0]);
             Attack(enemies);
         }
     }
@@ -111,16 +118,19 @@ public class BaseTowerLevel : MonoBehaviour {
         {
             BaseEntity enemy = other.gameObject.GetComponentInParent<BaseEntity>();
             if (enemy.CanBeTarget(projectile))
-                _inRange.Add(other.gameObject);
+                _inRange.Add(other.gameObject.GetComponent<BaseEntity>());
         }
     }
 
     protected void OnTriggerExit(Collider other)
     {
-        GameObject enemy = other.gameObject;
-        if (_inRange.Contains(enemy))
+        if (other.tag.Contains("Entity"))
         {
-            _inRange.Remove(enemy);
+            BaseEntity enemy = other.gameObject.GetComponent<BaseEntity>();
+            if (_inRange.Contains(enemy))
+            {
+                _inRange.Remove(enemy);
+            }
         }
     }
 }

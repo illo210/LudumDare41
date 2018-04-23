@@ -52,7 +52,7 @@ public class ProjectilePool : MonoBehaviour
                 return projectile;
             }
         }
-        GameObject newGameObject = Resources.Load("prefabs/" + projectileTemplate) as GameObject;
+        GameObject newGameObject = Instantiate(Resources.Load("Prefabs/" + projectileTemplate) as GameObject);
         BaseProjectile newProjectile = newGameObject.GetComponent<BaseProjectile>();
         projectileList.Add(newProjectile);
         newProjectile.Use();

@@ -50,14 +50,14 @@ public class SpawnEnemy : MonoBehaviour
             }
 
             // 4 
-            if (enemiesSpawned == waves[currentWave].maxEnemies &&
+            /*if (enemiesSpawned == waves[currentWave].maxEnemies &&
                 GameObject.FindGameObjectWithTag("Enemy") == null)
             {
                 gameManager.Wave++;
                 gameManager.Gold = Mathf.RoundToInt(gameManager.Gold * 1.1f);
                 enemiesSpawned = 0;
                 lastSpawnTime = Time.time;
-            }
+            }*/
 
             // 5 
         }
