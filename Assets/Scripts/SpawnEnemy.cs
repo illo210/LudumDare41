@@ -42,6 +42,12 @@ public class SpawnEnemy : MonoBehaviour
         lastSpawnTime = Time.time;
     }
 
+    private void recupfromarray(int currentWave)
+    {
+        for (int i = 0; waves[currentWave].pattern.Enemies[i] != null; i++)
+            waves[currentWave].maxEnemies += waves[currentWave].pattern.Enemies[i].number;
+    }
+
     // Update is called once per frame
     void Update()
     {
@@ -53,7 +59,7 @@ public class SpawnEnemy : MonoBehaviour
             float spawnInterval = waves[currentWave].pattern.Enemies[currentEnemy].spawnInterval;
             if (((enemiesSpawned == 0 && timeInterval > timeBetweenWaves) ||
                  timeInterval > spawnInterval) &&
-                enemiesSpawned < waves[currentWave].pattern.Enemies[currentEnemy].number)
+                enemiesS < waves[currentWave].pattern.Enemies[currentEnemy].number)
             {
                 // 3  
                 lastSpawnTime = Time.time;
