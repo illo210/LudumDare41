@@ -21,7 +21,7 @@ public class Pattern
 public class Wave
 {
     public Pattern pattern;
-    public int maxEnemies = 20;
+    public int maxEnemies = 0;
 }
 
 public class SpawnEnemy : MonoBehaviour
@@ -44,7 +44,7 @@ public class SpawnEnemy : MonoBehaviour
 
     private void recupfromarray(int currentWave)
     {
-        for (int i = 0; waves[currentWave].pattern.Enemies[i] != null; i++)
+        for (int i = 0; i + 1 < waves[currentWave].pattern.Enemies.Count; i++)
             waves[currentWave].maxEnemies += waves[currentWave].pattern.Enemies[i].number;
     }
 
@@ -61,6 +61,12 @@ public class SpawnEnemy : MonoBehaviour
                  timeInterval > spawnInterval) &&
                 enemiesS < waves[currentWave].pattern.Enemies[currentEnemy].number)
             {
+                if (waves[currentWave].maxEnemies == 0)
+                {
+                    recupfromarray(currentWave);
+                    Debug.Log(waves[currentWave].maxEnemies);
+                }
+
                 // 3  
                 lastSpawnTime = Time.time;
 
