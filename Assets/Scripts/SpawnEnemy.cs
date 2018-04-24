@@ -21,7 +21,6 @@ public class Pattern
 public class Wave
 {
     public Pattern pattern;
-    public int maxEnemies = 0;
 }
 
 public class SpawnEnemy : MonoBehaviour
@@ -42,58 +41,49 @@ public class SpawnEnemy : MonoBehaviour
         lastSpawnTime = Time.time;
     }
 
-    private void recupfromarray(int currentWave)
-    {
-        for (int i = 0; i + 1 < waves[currentWave].pattern.Enemies.Count; i++)
-            waves[currentWave].maxEnemies += waves[currentWave].pattern.Enemies[i].number;
-    }
-
     // Update is called once per frame
     void Update()
     {
         int currentWave = gameManager.Wave;
         if (currentWave < waves.Length)
         {
-            // 2
-            float timeInterval = Time.time - lastSpawnTime;
-            float spawnInterval = waves[currentWave].pattern.Enemies[currentEnemy].spawnInterval;
-            if (((enemiesSpawned == 0 && timeInterval > timeBetweenWaves) ||
-                 timeInterval > spawnInterval) &&
-                enemiesS < waves[currentWave].pattern.Enemies[currentEnemy].number &&
-                enemiesSpawned != waves[currentWave].maxEnemies)
-            {
-                if (waves[currentWave].maxEnemies == 0)
-                {
-                    recupfromarray(currentWave);
-                    Debug.Log(waves[currentWave].maxEnemies);
-                }
-
-                // 3  
-                lastSpawnTime = Time.time;
-
-                GameObject newEnemy = (GameObject)
-                    Instantiate(waves[currentWave].pattern.Enemies[currentEnemy].enemyPrefab);
-                newEnemy.GetComponent<BaseEnemy>().waypoints = waypoints;
-                newEnemy.transform.position = waypoints[0].transform.position;
-                enemiesSpawned++;
-                enemiesS++;
-                Debug.Log(enemiesS);
-                if (enemiesS == waves[currentWave].pattern.Enemies[currentEnemy].number)
-                {
-                    enemiesS = 0;
-                    currentEnemy = (currentEnemy + 1) % waves[currentWave].pattern.Enemies.Count;
-                    Debug.Log("Current Enemy :" + currentEnemy);
-                }
-            }
 
             // 4 
-            if (enemiesSpawned == waves[currentWave].maxEnemies &&
+            if (currentEnemy == waves[currentWave].pattern.Enemies.Count &&
                 GameObject.FindGameObjectWithTag("EntityEnemy") == null)
             {
                 gameManager.Wave++;
                 gameManager.Gold = Mathf.RoundToInt(gameManager.Gold * 1.1f);
                 enemiesSpawned = 0;
                 lastSpawnTime = Time.time;
+                currentEnemy = 0;
+            }
+            else if (currentEnemy < waves[currentWave].pattern.Enemies.Count)
+            {
+                // 2
+                float timeInterval = Time.time - lastSpawnTime;
+                float spawnInterval = waves[currentWave].pattern.Enemies[currentEnemy].spawnInterval;
+                if (((enemiesSpawned == 0 && timeInterval > timeBetweenWaves) ||
+                     timeInterval > spawnInterval) &&
+                    enemiesS < waves[currentWave].pattern.Enemies[currentEnemy].number)
+                {
+                    // 3  
+                    lastSpawnTime = Time.time;
+
+                    GameObject newEnemy = (GameObject)
+                        Instantiate(waves[currentWave].pattern.Enemies[currentEnemy].enemyPrefab);
+                    newEnemy.GetComponent<BaseEnemy>().waypoints = waypoints;
+                    newEnemy.transform.position = waypoints[0].transform.position;
+                    enemiesSpawned++;
+                    enemiesS++;
+                    Debug.Log(enemiesS);
+                    if (enemiesS == waves[currentWave].pattern.Enemies[currentEnemy].number)
+                    {
+                        enemiesS = 0;
+                        currentEnemy = currentEnemy + 1;
+                        Debug.Log("Current Enemy :" + currentEnemy);
+                    }
+                }
             }
 
             // 5 
